@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rex — Consultor Imobiliário Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f0f; --surface:#1a1a1a; --surface2:#222; --borda:#2a2a2a;
+  --verde:#25d366; --verde2:#1aab52; --verde-bg:rgba(37,211,102,.08);
+  --azul:#3b82f6; --azul-bg:rgba(59,130,246,.08);
+  --laranja:#e85d1a; --laranja2:#ff7a3d;
+  --text:#f0f0f0; --text2:#a0a0a0; --text3:#6b6b6b;
+  --branco:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+
+/* HEADER */
+header{width:100%;max-width:480px;padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--laranja),var(--laranja2));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.logo-text{font-weight:700;font-size:1rem;color:var(--text);}
+.logo-sub{font-size:.72rem;color:var(--text2);margin-top:1px;}
+.badge-demo{background:var(--verde-bg);border:1px solid rgba(37,211,102,.25);
+  color:var(--verde);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:20px;
+  letter-spacing:.5px;}
+
+/* PHONE */
+.phone-wrap{width:100%;max-width:420px;margin:20px auto 0;padding:0 16px 40px;}
+.phone{background:var(--surface);border-radius:24px;overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.5);border:1px solid var(--borda);}
+
+/* PHONE HEADER */
+.phone-header{background:#1f2c34;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a3942;}
+.phone-avatar{width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--laranja),#ff9a5c);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.phone-info{flex:1;}
+.phone-name{font-weight:700;font-size:.95rem;color:#e9edef;}
+.phone-status{font-size:.75rem;color:#8696a0;display:flex;align-items:center;gap:4px;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--verde);animation:pulse 2s infinite;}
+.phone-back{color:#8696a0;font-size:1.2rem;cursor:pointer;}
+
+/* CHAT */
+.chat{background:#0b141a;min-height:420px;max-height:500px;overflow-y:auto;
+  padding:16px 12px;display:flex;flex-direction:column;gap:8px;
+  scroll-behavior:smooth;}
+.chat::-webkit-scrollbar{width:4px;}
+.chat::-webkit-scrollbar-thumb{background:#2a3942;border-radius:2px;}
+
+/* BOLHAS */
+.msg{max-width:82%;padding:9px 13px;border-radius:12px;font-size:.88rem;line-height:1.5;
+  position:relative;animation:msgIn .25s ease;}
+.msg.rex{background:#1f2c34;color:#e9edef;align-self:flex-start;border-bottom-left-radius:3px;}
+.msg.user{background:#005c4b;color:#e9edef;align-self:flex-end;border-bottom-right-radius:3px;}
+.msg-time{font-size:.65rem;color:#8696a0;margin-top:4px;text-align:right;}
+.msg.rex .msg-time{text-align:left;}
+
+/* OPÇÕES */
+.opcoes{display:flex;flex-direction:column;gap:6px;margin-top:4px;align-self:flex-start;max-width:82%;}
+.opcao{background:#1f2c34;border:1px solid #2a3942;color:#53bdeb;
+  padding:8px 14px;border-radius:20px;font-size:.83rem;cursor:pointer;
+  transition:background .2s,border-color .2s;text-align:left;
+  animation:msgIn .25s ease;}
+.opcao:hover{background:#2a3942;border-color:#53bdeb;}
+.opcao:disabled{opacity:.4;cursor:not-allowed;}
+
+/* CHIPS DE PERFIL */
+.perfil-card{background:#1f2c34;border:1px solid #2a3942;border-left:3px solid var(--laranja);
+  padding:12px 14px;border-radius:8px;align-self:flex-start;max-width:85%;
+  animation:msgIn .3s ease;}
+.perfil-title{font-size:.75rem;font-weight:700;color:var(--laranja);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.perfil-row{display:flex;align-items:center;gap:8px;font-size:.82rem;
+  color:#e9edef;margin-bottom:4px;}
+.perfil-row:last-child{margin-bottom:0;}
+.perfil-icon{font-size:.9rem;width:18px;flex-shrink:0;}
+
+/* TYPING */
+.typing{display:flex;align-items:center;gap:4px;padding:10px 14px;
+  background:#1f2c34;border-radius:12px;border-bottom-left-radius:3px;
+  align-self:flex-start;animation:msgIn .2s ease;}
+.dot{width:6px;height:6px;border-radius:50%;background:#8696a0;
+  animation:bounce .8s ease infinite;}
+.dot:nth-child(2){animation-delay:.15s;}
+.dot:nth-child(3){animation-delay:.3s;}
+
+/* INPUT */
+.phone-input{background:#1f2c34;padding:10px 14px;
+  display:flex;align-items:center;gap:10px;border-top:1px solid #2a3942;}
+.input-field{flex:1;background:#2a3942;border:none;border-radius:20px;
+  padding:9px 16px;color:#e9edef;font-size:.88rem;font-family:inherit;outline:none;}
+.input-field::placeholder{color:#8696a0;}
+.send-btn{width:38px;height:38px;border-radius:50%;background:var(--verde);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:background .2s,transform .15s;}
+.send-btn:hover{background:var(--verde2);transform:scale(1.08);}
+.send-btn:disabled{background:#2a3942;cursor:not-allowed;transform:none;}
+
+/* RESTART */
+.restart-btn{margin:16px auto 0;display:flex;align-items:center;gap:8px;
+  background:transparent;border:1px solid var(--borda);color:var(--text2);
+  padding:9px 20px;border-radius:20px;font-size:.82rem;cursor:pointer;
+  transition:border-color .2s,color .2s;font-family:inherit;}
+.restart-btn:hover{border-color:var(--laranja);color:var(--laranja);}
+
+/* INFO */
+.info-bar{width:100%;max-width:420px;padding:0 16px;
+  display:flex;gap:10px;margin-bottom:4px;}
+.info-chip{flex:1;background:var(--surface);border:1px solid var(--borda);
+  border-radius:10px;padding:10px 12px;text-align:center;}
+.info-num{font-size:1.2rem;font-weight:700;color:var(--laranja);}
+.info-label{font-size:.72rem;color:var(--text2);margin-top:2px;}
+
+/* FOOTER */
+footer{padding:20px;font-size:.75rem;color:var(--text3);text-align:center;}
+footer a{color:var(--laranja);text-decoration:none;}
+
+/* ANIM */
+@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🏠</div>
+    <div>
+      <div class="logo-text">Rex</div>
+      <div class="logo-sub">Consultor Imobiliário Digital</div>
+    </div>
+  </div>
+  <div class="badge-demo">● DEMO AO VIVO</div>
+</header>
+
+<div class="info-bar" style="margin-top:16px;">
+  <div class="info-chip">
+    <div class="info-num" id="leads-count">0</div>
+    <div class="info-label">Leads qualificados</div>
+  </div>
+  <div class="info-chip">
+    <div class="info-num" id="time-count">0s</div>
+    <div class="info-label">Tempo de resposta</div>
+  </div>
+  <div class="info-chip">
+    <div class="info-num">24h</div>
+    <div class="info-label">Disponibilidade</div>
+  </div>
+</div>
+
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="phone-header">
+      <div class="phone-back">‹</div>
+      <div class="phone-avatar">🏠</div>
+      <div class="phone-info">
+        <div class="phone-name">Rex · Imóveis</div>
+        <div class="phone-status"><div class="status-dot"></div>online agora</div>
+      </div>
+    </div>
+
+    <div class="chat" id="chat"></div>
+
+    <div class="phone-input">
+      <input class="input-field" id="input" placeholder="Digite sua mensagem..." disabled>
+      <button class="send-btn" id="send-btn" disabled onclick="enviarMsg()">➤</button>
+    </div>
+  </div>
+
+  <button class="restart-btn" onclick="reiniciar()">↺ Recomeçar conversa</button>
+</div>
+
+<footer>Demo do Rex · Desenvolvido por <a href="#">Benhur Tecnologia</a></footer>
+
+<script>
+const chat = document.getElementById('chat');
+const input = document.getElementById('input');
+const sendBtn = document.getElementById('send-btn');
+
+let etapa = 0;
+let perfil = {};
+let leadsCount = 0;
+let startTime = null;
+
+const FLUXOS = {
+  comprador: [
+    { rex: 'Perfeito! Vou te ajudar a encontrar o imóvel ideal. 🏡\n\nQual faixa de valor você procura?', opcoes:['Até R$ 300 mil','Até R$ 500 mil','Até R$ 800 mil','Acima de R$ 800 mil'] },
+    { rex: 'Ótimo. Em qual região ou bairro você prefere?', input: true, placeholder:'Ex: Centro, Vila Nova, Jardim...' },
+    { rex: 'Quantos dormitórios você precisa?', opcoes:['1 dormitório','2 dormitórios','3 dormitórios','4 ou mais'] },
+    { rex: 'Como você pretende adquirir o imóvel?', opcoes:['Financiamento bancário','Compra à vista','FGTS + financiamento','Ainda não sei'] },
+    { rex: null, fn: 'fichaComprador' },
+  ],
+  vendedor: [
+    { rex: 'Vou ajudar você a colocar seu imóvel no mercado. 📋\n\nQual o tipo do imóvel?', opcoes:['Casa','Apartamento','Terreno','Comercial'] },
+    { rex: 'Qual o bairro ou endereço do imóvel?', input: true, placeholder:'Ex: Rua das Flores, Centro...' },
+    { rex: 'Qual a metragem aproximada?', opcoes:['Até 60m²','60 a 120m²','120 a 250m²','Acima de 250m²'] },
+    { rex: 'Qual o valor que você pretende vender?', opcoes:['Até R$ 300 mil','R$ 300 a 500 mil','R$ 500 a 800 mil','Acima de R$ 800 mil'] },
+    { rex: null, fn: 'fichaVendedor' },
+  ],
+  locacao: [
+    { rex: 'Vou verificar se temos imóveis compatíveis para locação. 🔑\n\nQual o tipo de imóvel que você procura?', opcoes:['Apartamento','Casa','Kitnet / Studio','Comercial'] },
+    { rex: 'Qual sua renda mensal aproximada?\n\n_(Pergunta necessária para verificar compatibilidade com os imóveis)_', opcoes:['Até R$ 2.000','R$ 2.000 a 5.000','R$ 5.000 a 10.000','Acima de R$ 10.000'] },
+    { rex: 'Você possui fiador ou pode oferecer garantia?', opcoes:['Tenho fiador','Seguro fiança','Depósito caução','Não tenho garantia'] },
+    { rex: 'Quantas pessoas vão residir no imóvel?', opcoes:['1 pessoa','2 pessoas','3 a 4 pessoas','5 ou mais'] },
+    { rex: null, fn: 'fichaLocacao' },
+  ],
+  investidor: [
+    { rex: 'Excelente! Vou entender seu perfil de investidor. 📈\n\nO que você busca com o investimento?', opcoes:['Renda mensal (aluguel)','Valorização a longo prazo','Os dois'] },
+    { rex: 'Qual o valor disponível para investimento?', opcoes:['Até R$ 300 mil','R$ 300 a 600 mil','R$ 600 mil a 1 mi','Acima de R$ 1 milhão'] },
+    { rex: 'Qual sua preferência de imóvel?', opcoes:['Residencial','Comercial','Galpão / Industrial','Tanto faz'] },
+    { rex: null, fn: 'fichaInvestidor' },
+  ],
+};
+
+let fluxoAtual = null;
+let etapaFluxo = 0;
+
+function hora(){ const n=new Date(); return n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0'); }
+
+function addMsg(txt, tipo, delay=0){
+  return new Promise(res=>{
+    setTimeout(()=>{
+      if(tipo==='rex'){
+        const t = addTyping();
+        setTimeout(()=>{
+          t.remove();
+          const d = document.createElement('div');
+          d.className = 'msg rex';
+          d.innerHTML = txt.replace(/\n/g,'<br>').replace(/\_(.*?)\_/g,'<em>$1</em>') + `<div class="msg-time">${hora()}</div>`;
+          chat.appendChild(d);
+          chat.scrollTop = chat.scrollHeight;
+          res();
+        }, 900 + Math.random()*400);
+      } else {
+        const d = document.createElement('div');
+        d.className = 'msg user';
+        d.innerHTML = txt + `<div class="msg-time">${hora()} ✓✓</div>`;
+        chat.appendChild(d);
+        chat.scrollTop = chat.scrollHeight;
+        res();
+      }
+    }, delay);
+  });
+}
+
+function addTyping(){
+  const d = document.createElement('div');
+  d.className = 'typing';
+  d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
+}
+
+function addOpcoes(opts, callback){
+  const wrap = document.createElement('div');
+  wrap.className = 'opcoes';
+  opts.forEach(o=>{
+    const b = document.createElement('button');
+    b.className = 'opcao';
+    b.textContent = o;
+    b.onclick = ()=>{
+      wrap.querySelectorAll('.opcao').forEach(x=>x.disabled=true);
+      callback(o);
+    };
+    wrap.appendChild(b);
+  });
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function enableInput(placeholder=''){
+  input.placeholder = placeholder || 'Digite sua resposta...';
+  input.disabled = false;
+  sendBtn.disabled = false;
+  input.focus();
+}
+function disableInput(){
+  input.disabled = true;
+  sendBtn.disabled = true;
+  input.placeholder = 'Digite sua mensagem...';
+}
+
+function fichaComprador(){
+  const d = document.createElement('div');
+  d.className = 'perfil-card';
+  d.innerHTML = `
+    <div class="perfil-title">✅ Lead Qualificado — Comprador</div>
+    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.valor||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">📍</span>${perfil.regiao||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🛏️</span>${perfil.quartos||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">💳</span>${perfil.financiamento||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🕐</span>Atendido em ${perfil.tempo||'—'}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  leadsCount++;
+  document.getElementById('leads-count').textContent = leadsCount;
+  addMsg('Perfeito! Encontrei imóveis compatíveis com o seu perfil. 🏡\n\nVou encaminhar seu contato ao corretor responsável. Ele entrará em contato em breve para agendar as visitas!\n\n_Você foi qualificado como comprador ativo._', 'rex');
+}
+
+function fichaVendedor(){
+  const d = document.createElement('div');
+  d.className = 'perfil-card';
+  d.innerHTML = `
+    <div class="perfil-title">✅ Lead Qualificado — Vendedor</div>
+    <div class="perfil-row"><span class="perfil-icon">🏠</span>${perfil.tipo||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">📍</span>${perfil.endereco||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">📐</span>${perfil.metragem||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.valor||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🕐</span>Ficha recebida em ${perfil.tempo||'—'}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  leadsCount++;
+  document.getElementById('leads-count').textContent = leadsCount;
+  addMsg('Ótimo! Sua ficha foi registrada com sucesso. 📋\n\nNosso corretor vai avaliar seu imóvel e entrar em contato para discutir a melhor estratégia de venda.', 'rex');
+}
+
+function fichaLocacao(){
+  const d = document.createElement('div');
+  d.className = 'perfil-card';
+  d.innerHTML = `
+    <div class="perfil-title">✅ Lead Qualificado — Locação</div>
+    <div class="perfil-row"><span class="perfil-icon">🏠</span>${perfil.tipo||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.renda||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🔒</span>${perfil.garantia||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">👥</span>${perfil.pessoas||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🕐</span>Qualificado em ${perfil.tempo||'—'}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  leadsCount++;
+  document.getElementById('leads-count').textContent = leadsCount;
+  addMsg('Verificamos que você tem perfil compatível com nossos imóveis disponíveis. 🔑\n\nO corretor vai entrar em contato com opções que se encaixam no seu perfil!', 'rex');
+}
+
+function fichaInvestidor(){
+  const d = document.createElement('div');
+  d.className = 'perfil-card';
+  d.innerHTML = `
+    <div class="perfil-title">✅ Lead Qualificado — Investidor</div>
+    <div class="perfil-row"><span class="perfil-icon">📈</span>${perfil.objetivo||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.capital||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🏢</span>${perfil.preferencia||'—'}</div>
+    <div class="perfil-row"><span class="perfil-icon">🕐</span>Perfil mapeado em ${perfil.tempo||'—'}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  leadsCount++;
+  document.getElementById('leads-count').textContent = leadsCount;
+  addMsg('Excelente perfil de investidor! 📊\n\nTemos oportunidades que podem gerar entre 0,6% e 0,9% ao mês. Nosso especialista em investimentos entrará em contato para uma análise personalizada.', 'rex');
+}
+
+async function processarEtapaFluxo(resposta){
+  const fluxo = FLUXOS[fluxoAtual];
+  const etapa = fluxo[etapaFluxo];
+
+  // salvar resposta no perfil
+  if(fluxoAtual==='comprador'){
+    if(etapaFluxo===0) perfil.valor = resposta;
+    else if(etapaFluxo===1) perfil.regiao = resposta;
+    else if(etapaFluxo===2) perfil.quartos = resposta;
+    else if(etapaFluxo===3) perfil.financiamento = resposta;
+  } else if(fluxoAtual==='vendedor'){
+    if(etapaFluxo===0) perfil.tipo = resposta;
+    else if(etapaFluxo===1) perfil.endereco = resposta;
+    else if(etapaFluxo===2) perfil.metragem = resposta;
+    else if(etapaFluxo===3) perfil.valor = resposta;
+  } else if(fluxoAtual==='locacao'){
+    if(etapaFluxo===0) perfil.tipo = resposta;
+    else if(etapaFluxo===1) perfil.renda = resposta;
+    else if(etapaFluxo===2) perfil.garantia = resposta;
+    else if(etapaFluxo===3) perfil.pessoas = resposta;
+  } else if(fluxoAtual==='investidor'){
+    if(etapaFluxo===0) perfil.objetivo = resposta;
+    else if(etapaFluxo===1) perfil.capital = resposta;
+    else if(etapaFluxo===2) perfil.preferencia = resposta;
+  }
+
+  etapaFluxo++;
+  if(etapaFluxo >= fluxo.length) return;
+
+  const prox = fluxo[etapaFluxo];
+  if(prox.fn){
+    const elapsed = Math.round((Date.now()-startTime)/1000);
+    perfil.tempo = elapsed + 's';
+    document.getElementById('time-count').textContent = elapsed+'s';
+    window[prox.fn]();
+    return;
+  }
+
+  await addMsg(prox.rex, 'rex');
+  if(prox.opcoes){
+    addOpcoes(prox.opcoes, async (op)=>{
+      await addMsg(op, 'user');
+      processarEtapaFluxo(op);
+    });
+  } else if(prox.input){
+    enableInput(prox.placeholder);
+  }
+}
+
+async function iniciarFluxo(tipo){
+  fluxoAtual = tipo;
+  etapaFluxo = 0;
+  perfil = {};
+  startTime = Date.now();
+  const prox = FLUXOS[tipo][0];
+  await addMsg(prox.rex, 'rex');
+  if(prox.opcoes){
+    addOpcoes(prox.opcoes, async (op)=>{
+      await addMsg(op,'user');
+      processarEtapaFluxo(op);
+    });
+  } else if(prox.input){
+    enableInput(prox.placeholder);
+  }
+}
+
+async function iniciar(){
+  await addMsg('Olá! Sou o *Rex*, seu consultor imobiliário digital. 🏠\n\nEstou disponível 24 horas para te ajudar.\n\nComo posso te atender hoje?', 'rex');
+  addOpcoes([
+    '🔍 Quero comprar um imóvel',
+    '💰 Quero vender meu imóvel',
+    '🔑 Quero alugar um imóvel',
+    '📈 Quero investir em imóveis',
+  ], async (op)=>{
+    await addMsg(op, 'user');
+    if(op.includes('comprar')) iniciarFluxo('comprador');
+    else if(op.includes('vender')) iniciarFluxo('vendedor');
+    else if(op.includes('alugar')) iniciarFluxo('locacao');
+    else if(op.includes('investir')) iniciarFluxo('investidor');
+  });
+}
+
+function enviarMsg(){
+  const txt = input.value.trim();
+  if(!txt) return;
+  input.value = '';
+  disableInput();
+  addMsg(txt, 'user');
+  processarEtapaFluxo(txt);
+}
+
+input.addEventListener('keydown', e=>{ if(e.key==='Enter') enviarMsg(); });
+
+function reiniciar(){
+  chat.innerHTML = '';
+  fluxoAtual = null;
+  etapaFluxo = 0;
+  perfil = {};
+  disableInput();
+  iniciar();
+}
+
+iniciar();
+</script>
+</body>
+</html>
