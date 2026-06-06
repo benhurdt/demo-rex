@@ -3,462 +3,481 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rex — Consultor Imobiliário Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Rex AI — Assistente Imobiliário</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0f0f0f; --surface:#1a1a1a; --surface2:#222; --borda:#2a2a2a;
-  --verde:#25d366; --verde2:#1aab52; --verde-bg:rgba(37,211,102,.08);
-  --azul:#3b82f6; --azul-bg:rgba(59,130,246,.08);
-  --laranja:#e85d1a; --laranja2:#ff7a3d;
-  --text:#f0f0f0; --text2:#a0a0a0; --text3:#6b6b6b;
-  --branco:#fff;
-}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+:root{--navy:#0F2D52;--navy-light:#1A3D6E;--navy-dark:#081D36;--gold:#D4A017;--gold-light:#E8B93A;--white:#fff;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;}
 
-/* HEADER */
-header{width:100%;max-width:480px;padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between;}
-.logo{display:flex;align-items:center;gap:10px;}
-.logo-icon{width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,var(--laranja),var(--laranja2));
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.logo-text{font-weight:700;font-size:1rem;color:var(--text);}
-.logo-sub{font-size:.72rem;color:var(--text2);margin-top:1px;}
-.badge-demo{background:var(--verde-bg);border:1px solid rgba(37,211,102,.25);
-  color:var(--verde);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:20px;
-  letter-spacing:.5px;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+@keyframes popIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 
-/* PHONE */
-.phone-wrap{width:100%;max-width:420px;margin:20px auto 0;padding:0 16px 40px;}
-.phone{background:var(--surface);border-radius:24px;overflow:hidden;
-  box-shadow:0 24px 64px rgba(0,0,0,.5);border:1px solid var(--borda);}
+.hero{text-align:center;margin-bottom:24px;animation:fadeDown 0.6s ease both;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.3);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;font-weight:500;margin-bottom:14px;}
+.hdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);font-weight:700;color:#fff;margin-bottom:8px;}
+.hero-title span{color:var(--gold);}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.45);max-width:380px;margin:0 auto;line-height:1.6;}
 
-/* PHONE HEADER */
-.phone-header{background:#1f2c34;padding:14px 18px;
-  display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a3942;}
-.phone-avatar{width:40px;height:40px;border-radius:50%;
-  background:linear-gradient(135deg,var(--laranja),#ff9a5c);
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
-.phone-info{flex:1;}
-.phone-name{font-weight:700;font-size:.95rem;color:#e9edef;}
-.phone-status{font-size:.75rem;color:#8696a0;display:flex;align-items:center;gap:4px;}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--verde);animation:pulse 2s infinite;}
-.phone-back{color:#8696a0;font-size:1.2rem;cursor:pointer;}
+.layout{display:grid;grid-template-columns:1fr 280px;gap:16px;width:100%;max-width:860px;animation:fadeUp 0.7s ease 0.15s both;}
 
-/* CHAT */
-.chat{background:#0b141a;min-height:420px;max-height:500px;overflow-y:auto;
-  padding:16px 12px;display:flex;flex-direction:column;gap:8px;
-  scroll-behavior:smooth;}
-.chat::-webkit-scrollbar{width:4px;}
-.chat::-webkit-scrollbar-thumb{background:#2a3942;border-radius:2px;}
+.chat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;}
+.topbar{background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 18px;display:flex;align-items:center;gap:10px;}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#D4A017,#B8860B);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy-dark);flex-shrink:0;}
+.rname{font-size:14px;font-weight:600;color:#fff;}
+.rstatus{font-size:12px;color:var(--gold-light);display:flex;align-items:center;gap:5px;}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+.rbtn{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 10px;font-size:12px;color:rgba(255,255,255,0.45);cursor:pointer;font-family:'DM Sans',sans-serif;}
+.rbtn:hover{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);}
 
-/* BOLHAS */
-.msg{max-width:82%;padding:9px 13px;border-radius:12px;font-size:.88rem;line-height:1.5;
-  position:relative;animation:msgIn .25s ease;}
-.msg.rex{background:#1f2c34;color:#e9edef;align-self:flex-start;border-bottom-left-radius:3px;}
-.msg.user{background:#005c4b;color:#e9edef;align-self:flex-end;border-bottom-right-radius:3px;}
-.msg-time{font-size:.65rem;color:#8696a0;margin-top:4px;text-align:right;}
-.msg.rex .msg-time{text-align:left;}
+.msgs{flex:1;min-height:360px;max-height:420px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
+.msgs::-webkit-scrollbar{width:3px;}
+.msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
 
-/* OPÇÕES */
-.opcoes{display:flex;flex-direction:column;gap:6px;margin-top:4px;align-self:flex-start;max-width:82%;}
-.opcao{background:#1f2c34;border:1px solid #2a3942;color:#53bdeb;
-  padding:8px 14px;border-radius:20px;font-size:.83rem;cursor:pointer;
-  transition:background .2s,border-color .2s;text-align:left;
-  animation:msgIn .25s ease;}
-.opcao:hover{background:#2a3942;border-color:#53bdeb;}
-.opcao:disabled{opacity:.4;cursor:not-allowed;}
+.msg{display:flex;flex-direction:column;gap:3px;max-width:80%;animation:popIn 0.2s ease both;}
+.msg.user{align-self:flex-end;}
+.msg.rex{align-self:flex-start;}
+.bubble{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.55;}
+.msg.user .bubble{background:var(--navy-light);color:#fff;border-bottom-right-radius:4px;}
+.msg.rex .bubble{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.08);border-bottom-left-radius:4px;}
+.mtime{font-size:11px;color:rgba(255,255,255,0.28);padding:0 4px;}
+.msg.user .mtime{text-align:right;}
 
-/* CHIPS DE PERFIL */
-.perfil-card{background:#1f2c34;border:1px solid #2a3942;border-left:3px solid var(--laranja);
-  padding:12px 14px;border-radius:8px;align-self:flex-start;max-width:85%;
-  animation:msgIn .3s ease;}
-.perfil-title{font-size:.75rem;font-weight:700;color:var(--laranja);
-  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
-.perfil-row{display:flex;align-items:center;gap:8px;font-size:.82rem;
-  color:#e9edef;margin-bottom:4px;}
-.perfil-row:last-child{margin-bottom:0;}
-.perfil-icon{font-size:.9rem;width:18px;flex-shrink:0;}
+.typing-wrap{align-self:flex-start;display:flex;gap:5px;align-items:center;padding:11px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.08);border-radius:14px;border-bottom-left-radius:4px;}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.tdot:nth-child(1){animation:bounce 1.2s 0s infinite;}
+.tdot:nth-child(2){animation:bounce 1.2s 0.2s infinite;}
+.tdot:nth-child(3){animation:bounce 1.2s 0.4s infinite;}
 
-/* TYPING */
-.typing{display:flex;align-items:center;gap:4px;padding:10px 14px;
-  background:#1f2c34;border-radius:12px;border-bottom-left-radius:3px;
-  align-self:flex-start;animation:msgIn .2s ease;}
-.dot{width:6px;height:6px;border-radius:50%;background:#8696a0;
-  animation:bounce .8s ease infinite;}
-.dot:nth-child(2){animation-delay:.15s;}
-.dot:nth-child(3){animation-delay:.3s;}
+.opts{padding:10px 14px;display:flex;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,0.06);}
+.opt{background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.25);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gold-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.opt:hover{background:rgba(212,160,23,0.2);}
 
-/* INPUT */
-.phone-input{background:#1f2c34;padding:10px 14px;
-  display:flex;align-items:center;gap:10px;border-top:1px solid #2a3942;}
-.input-field{flex:1;background:#2a3942;border:none;border-radius:20px;
-  padding:9px 16px;color:#e9edef;font-size:.88rem;font-family:inherit;outline:none;}
-.input-field::placeholder{color:#8696a0;}
-.send-btn{width:38px;height:38px;border-radius:50%;background:var(--verde);
-  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:1rem;transition:background .2s,transform .15s;}
-.send-btn:hover{background:var(--verde2);transform:scale(1.08);}
-.send-btn:disabled{background:#2a3942;cursor:not-allowed;transform:none;}
+.inp-area{padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:8px;align-items:center;}
+.inp{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:9px 14px;font-size:13px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.15s;}
+.inp::placeholder{color:rgba(255,255,255,0.28);}
+.inp:focus{border-color:rgba(212,160,23,0.4);}
+.sbtn{width:38px;height:38px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
+.sbtn:hover{background:var(--gold-light);}
+.sbtn:disabled{background:rgba(255,255,255,0.1);cursor:not-allowed;}
 
-/* RESTART */
-.restart-btn{margin:16px auto 0;display:flex;align-items:center;gap:8px;
-  background:transparent;border:1px solid var(--borda);color:var(--text2);
-  padding:9px 20px;border-radius:20px;font-size:.82rem;cursor:pointer;
-  transition:border-color .2s,color .2s;font-family:inherit;}
-.restart-btn:hover{border-color:var(--laranja);color:var(--laranja);}
+.right{display:flex;flex-direction:column;gap:14px;}
+.fcard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
+.fhead{background:linear-gradient(135deg,#1A3D6E,#0F2D52);padding:13px 15px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.ftitle{font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:2px;}
+.fname{font-size:12px;color:rgba(255,255,255,0.55);}
+.fbody{padding:12px 15px;display:flex;flex-direction:column;gap:7px;}
+.frow{display:flex;justify-content:space-between;gap:8px;}
+.fkey{font-size:11px;color:rgba(255,255,255,0.3);font-weight:500;flex-shrink:0;}
+.fval{font-size:11px;color:rgba(255,255,255,0.2);font-style:italic;text-align:right;}
+.fval.on{color:var(--gold-light);font-style:normal;font-weight:500;}
+.strack-wrap{margin-top:4px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);}
+.slabel{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;margin-bottom:7px;}
+.strack{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.sfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#1A3D6E,#D4A017);transition:width 0.6s ease;}
+.snum{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;margin-top:5px;}
+.sdesc{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;}
 
-/* INFO */
-.info-bar{width:100%;max-width:420px;padding:0 16px;
-  display:flex;gap:10px;margin-bottom:4px;}
-.info-chip{flex:1;background:var(--surface);border:1px solid var(--borda);
-  border-radius:10px;padding:10px 12px;text-align:center;}
-.info-num{font-size:1.2rem;font-weight:700;color:var(--laranja);}
-.info-label{font-size:.72rem;color:var(--text2);margin-top:2px;}
+.ecard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:13px 15px;}
+.etitle{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:11px;}
+.erow{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.erow:last-child{margin-bottom:0;}
+.ecircle{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.25);transition:all 0.4s;}
+.ecircle.done{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);}
+.ecircle.active{border-color:var(--gold);color:var(--gold);}
+.etext{font-size:12px;color:rgba(255,255,255,0.3);transition:color 0.4s;}
+.etext.done{color:rgba(255,255,255,0.8);}
+.etext.active{color:var(--gold-light);}
 
-/* FOOTER */
-footer{padding:20px;font-size:.75rem;color:var(--text3);text-align:center;}
-footer a{color:var(--laranja);text-decoration:none;}
+.disc{text-align:center;font-size:11px;color:rgba(255,255,255,0.18);margin-top:12px;}
 
-/* ANIM */
-@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@media(max-width:660px){.layout{grid-template-columns:1fr;}.right{display:grid;grid-template-columns:1fr 1fr;gap:12px;}}
+@media(max-width:420px){.right{grid-template-columns:1fr;}.msgs{min-height:260px;max-height:300px;}}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <div class="logo-icon">🏠</div>
-    <div>
-      <div class="logo-text">Rex</div>
-      <div class="logo-sub">Consultor Imobiliário Digital</div>
-    </div>
-  </div>
-  <div class="badge-demo">● DEMO AO VIVO</div>
-</header>
-
-<div class="info-bar" style="margin-top:16px;">
-  <div class="info-chip">
-    <div class="info-num" id="leads-count">0</div>
-    <div class="info-label">Leads qualificados</div>
-  </div>
-  <div class="info-chip">
-    <div class="info-num" id="time-count">0s</div>
-    <div class="info-label">Tempo de resposta</div>
-  </div>
-  <div class="info-chip">
-    <div class="info-num">24h</div>
-    <div class="info-label">Disponibilidade</div>
-  </div>
+<div class="hero">
+  <div class="hero-badge"><div class="hdot"></div>Demo ao vivo</div>
+  <div class="hero-title">Conheça o <span>Rex AI</span></div>
+  <div class="hero-sub">Seu pré-vendedor digital 24h. Qualifica leads e entrega fichas completas ao corretor.</div>
 </div>
 
-<div class="phone-wrap">
-  <div class="phone">
-    <div class="phone-header">
-      <div class="phone-back">‹</div>
-      <div class="phone-avatar">🏠</div>
-      <div class="phone-info">
-        <div class="phone-name">Rex · Imóveis</div>
-        <div class="phone-status"><div class="status-dot"></div>online agora</div>
+<div class="layout">
+  <div class="chat-card">
+    <div class="topbar">
+      <div class="av">R</div>
+      <div><div class="rname">Rex AI</div><div class="rstatus"><div class="sdot"></div>Online agora</div></div>
+      <button class="rbtn" onclick="reset()">↺ Reiniciar</button>
+    </div>
+    <div class="msgs" id="msgs"></div>
+    <div class="opts" id="opts"></div>
+    <div class="inp-area">
+      <input class="inp" id="inp" placeholder="Digite sua resposta..." autocomplete="off" onkeydown="if(event.key==='Enter')send()">
+      <button class="sbtn" id="sbtn" onclick="send()">
+        <svg style="width:15px;height:15px;fill:none;stroke:#081D36;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="fcard">
+      <div class="fhead"><div class="ftitle">Ficha do lead</div><div class="fname" id="fname">Aguardando...</div></div>
+      <div class="fbody">
+        <div class="frow"><span class="fkey">Objetivo</span><span class="fval" id="fo">—</span></div>
+        <div class="frow"><span class="fkey">Tipo</span><span class="fval" id="ft">—</span></div>
+        <div class="frow"><span class="fkey">Cidade</span><span class="fval" id="fc">—</span></div>
+        <div class="frow"><span class="fkey">Bairro</span><span class="fval" id="fb">—</span></div>
+        <div class="frow"><span class="fkey">Faixa valor</span><span class="fval" id="fv">—</span></div>
+        <div class="frow"><span class="fkey">Quartos</span><span class="fval" id="fq">—</span></div>
+        <div class="frow"><span class="fkey">Financiamento</span><span class="fval" id="ff">—</span></div>
+        <div class="frow"><span class="fkey">Urgência</span><span class="fval" id="fu">—</span></div>
+        <div class="frow"><span class="fkey">Motivo</span><span class="fval" id="fm">—</span></div>
+        <div class="strack-wrap">
+          <div class="slabel">Score de qualificação</div>
+          <div class="strack"><div class="sfill" id="sfill" style="width:0%"></div></div>
+          <div class="snum" id="snum">0</div>
+          <div class="sdesc" id="sdesc">Aguardando dados</div>
+        </div>
       </div>
     </div>
-
-    <div class="chat" id="chat"></div>
-
-    <div class="phone-input">
-      <input class="input-field" id="input" placeholder="Digite sua mensagem..." disabled>
-      <button class="send-btn" id="send-btn" disabled onclick="enviarMsg()">➤</button>
+    <div class="ecard">
+      <div class="etitle">Progresso</div>
+      <div class="erow"><div class="ecircle active" id="e1">1</div><div class="etext active" id="et1">Identificação</div></div>
+      <div class="erow"><div class="ecircle" id="e2">2</div><div class="etext" id="et2">Objetivo</div></div>
+      <div class="erow"><div class="ecircle" id="e3">3</div><div class="etext" id="et3">Qualificação financeira</div></div>
+      <div class="erow"><div class="ecircle" id="e4">4</div><div class="etext" id="et4">Características</div></div>
     </div>
   </div>
-
-  <button class="restart-btn" onclick="reiniciar()">↺ Recomeçar conversa</button>
 </div>
 
-<footer>Demo do Rex · Desenvolvido por <a href="#">Benhur Tecnologia</a></footer>
+<div class="disc">Demo Rex AI · Benhur Debastiani Teixeira · Osório RS</div>
 
 <script>
-const chat = document.getElementById('chat');
-const input = document.getElementById('input');
-const sendBtn = document.getElementById('send-btn');
+// ESTADO
+let estado = {};
+let loading = false;
 
-let etapa = 0;
-let perfil = {};
-let leadsCount = 0;
-let startTime = null;
+function getTime(){const n=new Date();return n.getHours()+':'+String(n.getMinutes()).padStart(2,'0');}
 
-const FLUXOS = {
-  comprador: [
-    { rex: 'Perfeito! Vou te ajudar a encontrar o imóvel ideal. 🏡\n\nQual faixa de valor você procura?', opcoes:['Até R$ 300 mil','Até R$ 500 mil','Até R$ 800 mil','Acima de R$ 800 mil'] },
-    { rex: 'Ótimo. Em qual região ou bairro você prefere?', input: true, placeholder:'Ex: Centro, Vila Nova, Jardim...' },
-    { rex: 'Quantos dormitórios você precisa?', opcoes:['1 dormitório','2 dormitórios','3 dormitórios','4 ou mais'] },
-    { rex: 'Como você pretende adquirir o imóvel?', opcoes:['Financiamento bancário','Compra à vista','FGTS + financiamento','Ainda não sei'] },
-    { rex: null, fn: 'fichaComprador' },
-  ],
-  vendedor: [
-    { rex: 'Vou ajudar você a colocar seu imóvel no mercado. 📋\n\nQual o tipo do imóvel?', opcoes:['Casa','Apartamento','Terreno','Comercial'] },
-    { rex: 'Qual o bairro ou endereço do imóvel?', input: true, placeholder:'Ex: Rua das Flores, Centro...' },
-    { rex: 'Qual a metragem aproximada?', opcoes:['Até 60m²','60 a 120m²','120 a 250m²','Acima de 250m²'] },
-    { rex: 'Qual o valor que você pretende vender?', opcoes:['Até R$ 300 mil','R$ 300 a 500 mil','R$ 500 a 800 mil','Acima de R$ 800 mil'] },
-    { rex: null, fn: 'fichaVendedor' },
-  ],
-  locacao: [
-    { rex: 'Vou verificar se temos imóveis compatíveis para locação. 🔑\n\nQual o tipo de imóvel que você procura?', opcoes:['Apartamento','Casa','Kitnet / Studio','Comercial'] },
-    { rex: 'Qual sua renda mensal aproximada?\n\n_(Pergunta necessária para verificar compatibilidade com os imóveis)_', opcoes:['Até R$ 2.000','R$ 2.000 a 5.000','R$ 5.000 a 10.000','Acima de R$ 10.000'] },
-    { rex: 'Você possui fiador ou pode oferecer garantia?', opcoes:['Tenho fiador','Seguro fiança','Depósito caução','Não tenho garantia'] },
-    { rex: 'Quantas pessoas vão residir no imóvel?', opcoes:['1 pessoa','2 pessoas','3 a 4 pessoas','5 ou mais'] },
-    { rex: null, fn: 'fichaLocacao' },
-  ],
-  investidor: [
-    { rex: 'Excelente! Vou entender seu perfil de investidor. 📈\n\nO que você busca com o investimento?', opcoes:['Renda mensal (aluguel)','Valorização a longo prazo','Os dois'] },
-    { rex: 'Qual o valor disponível para investimento?', opcoes:['Até R$ 300 mil','R$ 300 a 600 mil','R$ 600 mil a 1 mi','Acima de R$ 1 milhão'] },
-    { rex: 'Qual sua preferência de imóvel?', opcoes:['Residencial','Comercial','Galpão / Industrial','Tanto faz'] },
-    { rex: null, fn: 'fichaInvestidor' },
-  ],
-};
+// FLUXO DE CONVERSA
+const FLUXO = [
+  // ETAPA 1 — IDENTIFICAÇÃO
+  {
+    id:'inicio',
+    rex:'Olá! 👋 Seja bem-vindo! Sou o Rex, assistente virtual do corretor Carlos Mendes.\n\nEstou aqui para ajudá-lo a encontrar o imóvel ideal. Para começar, qual é o seu nome?',
+    etapa:1,
+    captura:null,
+    opts:[],
+    proximo:(inp)=>'objetivo'
+  },
+  {
+    id:'objetivo',
+    rex:(e)=>`Prazer, ${e.nome}! 😊\n\nO que você está procurando?`,
+    etapa:1,
+    captura:'nome',
+    opts:['🏠 Quero comprar','🔑 Quero alugar','💰 Quero vender'],
+    proximo:(inp)=>{
+      const t=inp.toLowerCase();
+      if(t.includes('comprar')||t.includes('compra')) return 'tipo_comprar';
+      if(t.includes('alugar')||t.includes('aluguel')||t.includes('alugo')) return 'tipo_alugar';
+      if(t.includes('vender')||t.includes('vendo')) return 'vender_tipo';
+      return 'tipo_comprar';
+    }
+  },
+  // COMPRAR
+  {
+    id:'tipo_comprar',
+    rex:'Ótimo! Qual tipo de imóvel você procura?',
+    etapa:2,
+    captura:'objetivo',
+    capturaValor:'Comprar',
+    opts:['🏠 Casa','🏢 Apartamento','🌿 Terreno','🏪 Sala comercial'],
+    proximo:()=>'cidade_desejada'
+  },
+  // ALUGAR
+  {
+    id:'tipo_alugar',
+    rex:'Certo! Qual tipo de imóvel você procura para alugar?',
+    etapa:2,
+    captura:'objetivo',
+    capturaValor:'Alugar',
+    opts:['🏠 Casa','🏢 Apartamento','🏪 Sala comercial'],
+    proximo:()=>'cidade_desejada'
+  },
+  // VENDER
+  {
+    id:'vender_tipo',
+    rex:'Entendido! Que tipo de imóvel você deseja vender?',
+    etapa:2,
+    captura:'objetivo',
+    capturaValor:'Vender',
+    opts:['🏠 Casa','🏢 Apartamento','🌿 Terreno','🏪 Sala comercial'],
+    proximo:()=>'vender_cidade'
+  },
+  {
+    id:'vender_cidade',
+    rex:(e)=>`${e.tipo_imovel ? e.tipo_imovel+' anotado!' : 'Certo!'} Em qual cidade e bairro está localizado o imóvel?`,
+    etapa:2,
+    captura:'tipo_imovel',
+    opts:[],
+    proximo:()=>'vender_valor'
+  },
+  {
+    id:'vender_valor',
+    rex:'Qual o valor que você espera pelo imóvel?',
+    etapa:3,
+    captura:'cidade_desejada',
+    opts:[],
+    proximo:()=>'vender_fim'
+  },
+  {
+    id:'vender_fim',
+    rex:(e)=>`Perfeito! Recebi todas as informações.\n\n📋 Resumo:\n• Objetivo: Vender\n• Local: ${e.cidade_desejada||'informado'}\n• Valor pretendido: ${e.faixa_valor||'informado'}\n\nO corretor Carlos Mendes entrará em contato em breve para agendar a avaliação do imóvel! 🏡`,
+    etapa:4,
+    captura:'faixa_valor',
+    opts:['↺ Nova consulta'],
+    proximo:()=>'inicio'
+  },
+  // SEQUÊNCIA COMPRAR/ALUGAR
+  {
+    id:'cidade_desejada',
+    rex:(e)=>`${e.tipo_imovel||'Imóvel'} anotado! Em qual cidade você prefere?`,
+    etapa:2,
+    captura:'tipo_imovel',
+    opts:['Porto Alegre','Canoas','Novo Hamburgo','Gravataí','Cachoeirinha'],
+    proximo:()=>'bairro'
+  },
+  {
+    id:'bairro',
+    rex:(e)=>`${e.cidade_desejada||'Cidade'} anotado! Tem algum bairro de preferência?`,
+    etapa:2,
+    captura:'cidade_desejada',
+    opts:['Menino Deus','Moinhos de Vento','Petrópolis','Independência','Sem preferência'],
+    proximo:()=>'faixa_valor'
+  },
+  {
+    id:'faixa_valor',
+    rex:(e)=>`${e.objetivo==='Alugar'?'Qual o valor máximo de aluguel?':'Qual a faixa de valor do imóvel?'}`,
+    etapa:3,
+    captura:'bairro_desejado',
+    opts:e=>e.objetivo==='Alugar'
+      ?['Até R$ 2.000/mês','R$ 2.000–3.500/mês','R$ 3.500–6.000/mês','Acima R$ 6.000/mês']
+      :['Até R$ 200 mil','R$ 200–400 mil','R$ 400–700 mil','Acima R$ 700 mil'],
+    proximo:()=>'quartos'
+  },
+  {
+    id:'quartos',
+    rex:'Quantos quartos você precisa?',
+    etapa:3,
+    captura:'faixa_valor',
+    opts:['1 quarto','2 quartos','3 quartos','4 ou mais'],
+    proximo:(inp,e)=>e.objetivo==='Alugar'?'urgencia':'financiamento'
+  },
+  {
+    id:'financiamento',
+    rex:'Vai precisar de financiamento?',
+    etapa:3,
+    captura:'quartos',
+    opts:['Sim, vou financiar','Não, à vista','Talvez, ainda avaliando'],
+    proximo:()=>'fgts'
+  },
+  {
+    id:'fgts',
+    rex:'Possui FGTS disponível para usar?',
+    etapa:3,
+    captura:'vai_financiar',
+    opts:['Sim, tenho FGTS','Não tenho','Não sei ainda'],
+    proximo:()=>'urgencia'
+  },
+  {
+    id:'urgencia',
+    rex:'Qual a sua urgência para fechar negócio?',
+    etapa:4,
+    captura:'tem_fgts',
+    opts:['Imediatamente','Até 3 meses','Até 6 meses','Apenas pesquisando'],
+    proximo:()=>'motivo'
+  },
+  {
+    id:'motivo',
+    rex:'Qual o principal motivo da busca?',
+    etapa:4,
+    captura:'urgencia',
+    opts:['Primeiro imóvel','Casamento/família','Investimento','Mudança de cidade','Aposentadoria'],
+    proximo:()=>'fim'
+  },
+  {
+    id:'fim',
+    rex:(e)=>`Perfeito, ${e.nome||''}! Coletei todas as informações. 🎉\n\nAqui está o resumo do seu perfil:\n\n🏠 ${e.objetivo||'Comprar'} • ${e.tipo_imovel||'imóvel'}\n📍 ${e.cidade_desejada||''} — ${e.bairro_desejado||''}\n💰 ${e.faixa_valor||''} • ${e.quartos||''}\n⚡ Urgência: ${e.urgencia||''}\n💡 Motivo: ${e.motivo||''}\n\nO corretor Carlos Mendes entrará em contato em breve com as melhores opções para você! 🤝`,
+    etapa:4,
+    captura:'motivo',
+    opts:['↺ Nova consulta'],
+    proximo:()=>'inicio'
+  },
+];
 
-let fluxoAtual = null;
-let etapaFluxo = 0;
+const fluxoMap = {};
+FLUXO.forEach(f=>fluxoMap[f.id]=f);
 
-function hora(){ const n=new Date(); return n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0'); }
+let passoAtual = 'inicio';
 
-function addMsg(txt, tipo, delay=0){
-  return new Promise(res=>{
-    setTimeout(()=>{
-      if(tipo==='rex'){
-        const t = addTyping();
-        setTimeout(()=>{
-          t.remove();
-          const d = document.createElement('div');
-          d.className = 'msg rex';
-          d.innerHTML = txt.replace(/\n/g,'<br>').replace(/\_(.*?)\_/g,'<em>$1</em>') + `<div class="msg-time">${hora()}</div>`;
-          chat.appendChild(d);
-          chat.scrollTop = chat.scrollHeight;
-          res();
-        }, 900 + Math.random()*400);
-      } else {
-        const d = document.createElement('div');
-        d.className = 'msg user';
-        d.innerHTML = txt + `<div class="msg-time">${hora()} ✓✓</div>`;
-        chat.appendChild(d);
-        chat.scrollTop = chat.scrollHeight;
-        res();
-      }
-    }, delay);
-  });
+function setFicha(key, val){
+  if(!val||val==='—') return;
+  estado[key] = val;
+  const map={nome:'fname',objetivo:'fo',tipo_imovel:'ft',cidade_desejada:'fc',bairro_desejado:'fb',faixa_valor:'fv',quartos:'fq',vai_financiar:'ff',urgencia:'fu',motivo:'fm'};
+  if(map[key]){
+    const el=document.getElementById(map[key]);
+    if(el){el.textContent=val;el.className='fval on';}
+  }
+  if(key==='nome') document.getElementById('fname').textContent=val;
+  updateScore();
 }
 
-function addTyping(){
-  const d = document.createElement('div');
-  d.className = 'typing';
-  d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-  chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
-  return d;
+function updateScore(){
+  const fields=['nome','objetivo','tipo_imovel','cidade_desejada','bairro_desejado','faixa_valor','quartos','vai_financiar','urgencia','motivo'];
+  const filled=fields.filter(f=>estado[f]).length;
+  const score=Math.round((filled/fields.length)*100);
+  document.getElementById('sfill').style.width=score+'%';
+  document.getElementById('snum').textContent=score;
+  document.getElementById('sdesc').textContent=score<30?'Início da qualificação':score<60?'Em qualificação':score<85?'Quase qualificado':'✓ Lead qualificado!';
 }
 
-function addOpcoes(opts, callback){
-  const wrap = document.createElement('div');
-  wrap.className = 'opcoes';
+function updateEtapas(etapa){
+  for(let i=1;i<=4;i++){
+    const c=document.getElementById('e'+i);
+    const t=document.getElementById('et'+i);
+    if(i<etapa){c.className='ecircle done';c.textContent='✓';t.className='etext done';}
+    else if(i===etapa){c.className='ecircle active';c.textContent=i;t.className='etext active';}
+    else{c.className='ecircle';c.textContent=i;t.className='etext';}
+  }
+}
+
+function addMsg(role, text){
+  const c=document.getElementById('msgs');
+  const d=document.createElement('div');
+  d.className='msg '+role;
+  // Converte \n em <br>
+  const formatted = text.replace(/\n/g,'<br>');
+  d.innerHTML=`<div class="bubble">${formatted}</div><div class="mtime">${role==='user'?'✓✓ ':''}${getTime()}</div>`;
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+}
+
+function showTyping(){
+  const c=document.getElementById('msgs');
+  const d=document.createElement('div');
+  d.className='typing-wrap';d.id='typing';
+  d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+
+function removeTyping(){const e=document.getElementById('typing');if(e)e.remove();}
+
+function showOpts(opts){
+  const c=document.getElementById('opts');
+  c.innerHTML='';
+  if(!opts||opts.length===0){c.style.display='none';return;}
+  c.style.display='flex';
   opts.forEach(o=>{
-    const b = document.createElement('button');
-    b.className = 'opcao';
-    b.textContent = o;
-    b.onclick = ()=>{
-      wrap.querySelectorAll('.opcao').forEach(x=>x.disabled=true);
-      callback(o);
-    };
-    wrap.appendChild(b);
-  });
-  chat.appendChild(wrap);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function enableInput(placeholder=''){
-  input.placeholder = placeholder || 'Digite sua resposta...';
-  input.disabled = false;
-  sendBtn.disabled = false;
-  input.focus();
-}
-function disableInput(){
-  input.disabled = true;
-  sendBtn.disabled = true;
-  input.placeholder = 'Digite sua mensagem...';
-}
-
-function fichaComprador(){
-  const d = document.createElement('div');
-  d.className = 'perfil-card';
-  d.innerHTML = `
-    <div class="perfil-title">✅ Lead Qualificado — Comprador</div>
-    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.valor||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">📍</span>${perfil.regiao||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🛏️</span>${perfil.quartos||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">💳</span>${perfil.financiamento||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🕐</span>Atendido em ${perfil.tempo||'—'}</div>`;
-  chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
-  leadsCount++;
-  document.getElementById('leads-count').textContent = leadsCount;
-  addMsg('Perfeito! Encontrei imóveis compatíveis com o seu perfil. 🏡\n\nVou encaminhar seu contato ao corretor responsável. Ele entrará em contato em breve para agendar as visitas!\n\n_Você foi qualificado como comprador ativo._', 'rex');
-}
-
-function fichaVendedor(){
-  const d = document.createElement('div');
-  d.className = 'perfil-card';
-  d.innerHTML = `
-    <div class="perfil-title">✅ Lead Qualificado — Vendedor</div>
-    <div class="perfil-row"><span class="perfil-icon">🏠</span>${perfil.tipo||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">📍</span>${perfil.endereco||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">📐</span>${perfil.metragem||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.valor||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🕐</span>Ficha recebida em ${perfil.tempo||'—'}</div>`;
-  chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
-  leadsCount++;
-  document.getElementById('leads-count').textContent = leadsCount;
-  addMsg('Ótimo! Sua ficha foi registrada com sucesso. 📋\n\nNosso corretor vai avaliar seu imóvel e entrar em contato para discutir a melhor estratégia de venda.', 'rex');
-}
-
-function fichaLocacao(){
-  const d = document.createElement('div');
-  d.className = 'perfil-card';
-  d.innerHTML = `
-    <div class="perfil-title">✅ Lead Qualificado — Locação</div>
-    <div class="perfil-row"><span class="perfil-icon">🏠</span>${perfil.tipo||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.renda||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🔒</span>${perfil.garantia||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">👥</span>${perfil.pessoas||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🕐</span>Qualificado em ${perfil.tempo||'—'}</div>`;
-  chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
-  leadsCount++;
-  document.getElementById('leads-count').textContent = leadsCount;
-  addMsg('Verificamos que você tem perfil compatível com nossos imóveis disponíveis. 🔑\n\nO corretor vai entrar em contato com opções que se encaixam no seu perfil!', 'rex');
-}
-
-function fichaInvestidor(){
-  const d = document.createElement('div');
-  d.className = 'perfil-card';
-  d.innerHTML = `
-    <div class="perfil-title">✅ Lead Qualificado — Investidor</div>
-    <div class="perfil-row"><span class="perfil-icon">📈</span>${perfil.objetivo||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">💰</span>${perfil.capital||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🏢</span>${perfil.preferencia||'—'}</div>
-    <div class="perfil-row"><span class="perfil-icon">🕐</span>Perfil mapeado em ${perfil.tempo||'—'}</div>`;
-  chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
-  leadsCount++;
-  document.getElementById('leads-count').textContent = leadsCount;
-  addMsg('Excelente perfil de investidor! 📊\n\nNosso especialista entrará em contato para apresentar as oportunidades disponíveis e montar uma análise personalizada para você.', 'rex');
-}
-
-async function processarEtapaFluxo(resposta){
-  const fluxo = FLUXOS[fluxoAtual];
-  const etapa = fluxo[etapaFluxo];
-
-  // salvar resposta no perfil
-  if(fluxoAtual==='comprador'){
-    if(etapaFluxo===0) perfil.valor = resposta;
-    else if(etapaFluxo===1) perfil.regiao = resposta;
-    else if(etapaFluxo===2) perfil.quartos = resposta;
-    else if(etapaFluxo===3) perfil.financiamento = resposta;
-  } else if(fluxoAtual==='vendedor'){
-    if(etapaFluxo===0) perfil.tipo = resposta;
-    else if(etapaFluxo===1) perfil.endereco = resposta;
-    else if(etapaFluxo===2) perfil.metragem = resposta;
-    else if(etapaFluxo===3) perfil.valor = resposta;
-  } else if(fluxoAtual==='locacao'){
-    if(etapaFluxo===0) perfil.tipo = resposta;
-    else if(etapaFluxo===1) perfil.renda = resposta;
-    else if(etapaFluxo===2) perfil.garantia = resposta;
-    else if(etapaFluxo===3) perfil.pessoas = resposta;
-  } else if(fluxoAtual==='investidor'){
-    if(etapaFluxo===0) perfil.objetivo = resposta;
-    else if(etapaFluxo===1) perfil.capital = resposta;
-    else if(etapaFluxo===2) perfil.preferencia = resposta;
-  }
-
-  etapaFluxo++;
-  if(etapaFluxo >= fluxo.length) return;
-
-  const prox = fluxo[etapaFluxo];
-  if(prox.fn){
-    const elapsed = Math.round((Date.now()-startTime)/1000);
-    perfil.tempo = elapsed + 's';
-    document.getElementById('time-count').textContent = elapsed+'s';
-    window[prox.fn]();
-    return;
-  }
-
-  await addMsg(prox.rex, 'rex');
-  if(prox.opcoes){
-    addOpcoes(prox.opcoes, async (op)=>{
-      await addMsg(op, 'user');
-      processarEtapaFluxo(op);
-    });
-  } else if(prox.input){
-    enableInput(prox.placeholder);
-  }
-}
-
-async function iniciarFluxo(tipo){
-  fluxoAtual = tipo;
-  etapaFluxo = 0;
-  perfil = {};
-  startTime = Date.now();
-  const prox = FLUXOS[tipo][0];
-  await addMsg(prox.rex, 'rex');
-  if(prox.opcoes){
-    addOpcoes(prox.opcoes, async (op)=>{
-      await addMsg(op,'user');
-      processarEtapaFluxo(op);
-    });
-  } else if(prox.input){
-    enableInput(prox.placeholder);
-  }
-}
-
-async function iniciar(){
-  await addMsg('Olá! Sou o *Rex*, seu consultor imobiliário digital. 🏠\n\nEstou disponível 24 horas para te ajudar.\n\nComo posso te atender hoje?', 'rex');
-  addOpcoes([
-    '🔍 Quero comprar um imóvel',
-    '💰 Quero vender meu imóvel',
-    '🔑 Quero alugar um imóvel',
-    '📈 Quero investir em imóveis',
-  ], async (op)=>{
-    await addMsg(op, 'user');
-    if(op.includes('comprar')) iniciarFluxo('comprador');
-    else if(op.includes('vender')) iniciarFluxo('vendedor');
-    else if(op.includes('alugar')) iniciarFluxo('locacao');
-    else if(op.includes('investir')) iniciarFluxo('investidor');
+    const b=document.createElement('button');
+    b.className='opt';b.textContent=o;
+    b.onclick=()=>processInput(o);
+    c.appendChild(b);
   });
 }
 
-function enviarMsg(){
-  const txt = input.value.trim();
-  if(!txt) return;
-  input.value = '';
-  disableInput();
-  addMsg(txt, 'user');
-  processarEtapaFluxo(txt);
+function processInput(inp){
+  if(loading) return;
+  document.getElementById('opts').style.display='none';
+  const passo=fluxoMap[passoAtual];
+  if(!passo) return;
+
+  addMsg('user', inp);
+  loading=true;
+  document.getElementById('sbtn').disabled=true;
+
+  // Captura dado
+  if(passo.captura){
+    const val = passo.capturaValor || inp.replace(/^[^\w\s]/,'').trim();
+    setFicha(passo.captura, val);
+  }
+
+  showTyping();
+  const delay = 800 + Math.random()*600;
+
+  setTimeout(()=>{
+    removeTyping();
+    const proximo = passo.proximo(inp, estado);
+
+    // Caso especial: nova consulta
+    if(inp.includes('Nova consulta')||inp.includes('Reiniciar')){
+      reset(); return;
+    }
+
+    passoAtual = proximo;
+    const novoPasso = fluxoMap[passoAtual];
+    if(!novoPasso){ loading=false; return; }
+
+    updateEtapas(novoPasso.etapa);
+
+    const msg = typeof novoPasso.rex === 'function' ? novoPasso.rex(estado) : novoPasso.rex;
+    addMsg('rex', msg);
+
+    const opts = typeof novoPasso.opts === 'function' ? novoPasso.opts(estado) : novoPasso.opts;
+    showOpts(opts);
+
+    loading=false;
+    document.getElementById('sbtn').disabled=false;
+    document.getElementById('inp').focus();
+  }, delay);
 }
 
-input.addEventListener('keydown', e=>{ if(e.key==='Enter') enviarMsg(); });
-
-function reiniciar(){
-  chat.innerHTML = '';
-  fluxoAtual = null;
-  etapaFluxo = 0;
-  perfil = {};
-  disableInput();
-  iniciar();
+function send(){
+  const inp=document.getElementById('inp');
+  const txt=inp.value.trim();
+  if(!txt||loading) return;
+  inp.value='';
+  processInput(txt);
 }
 
-iniciar();
+function reset(){
+  estado={};
+  loading=false;
+  passoAtual='inicio';
+  document.getElementById('msgs').innerHTML='';
+  document.getElementById('opts').style.display='none';
+  document.getElementById('fname').textContent='Aguardando...';
+  ['fo','ft','fc','fb','fv','fq','ff','fu','fm'].forEach(id=>{
+    const el=document.getElementById(id);el.textContent='—';el.className='fval';
+  });
+  document.getElementById('sfill').style.width='0%';
+  document.getElementById('snum').textContent='0';
+  document.getElementById('sdesc').textContent='Aguardando dados';
+  for(let i=1;i<=4;i++){
+    document.getElementById('e'+i).className=i===1?'ecircle active':'ecircle';
+    document.getElementById('e'+i).textContent=i;
+    document.getElementById('et'+i).className=i===1?'etext active':'etext';
+  }
+  document.getElementById('sbtn').disabled=false;
+
+  // Mensagem inicial
+  loading=true;
+  showTyping();
+  setTimeout(()=>{
+    removeTyping();
+    const passo=fluxoMap['inicio'];
+    addMsg('rex', passo.rex);
+    showOpts(passo.opts);
+    loading=false;
+  }, 900);
+}
+
+// Iniciar
+window.addEventListener('load',()=>setTimeout(reset,400));
 </script>
 </body>
 </html>
