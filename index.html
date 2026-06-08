@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--navy:#0F2D52;--navy-light:#1A3D6E;--navy-dark:#081D36;--gold:#D4A017;--gold-light:#E8B93A;--white:#fff;}
+:root{--navy:#0F2D52;--navy-light:#1A3D6E;--navy-dark:#081D36;--gold:#D4A017;--gold-light:#E8B93A;--white:#fff;--green:#1A7A4A;--green-bright:#4ade80;--red:#f87171;--amber:#F59E0B;}
 body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;}
 
 @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
@@ -15,6 +15,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
 @keyframes popIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .hero{text-align:center;margin-bottom:24px;animation:fadeDown 0.6s ease both;}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.3);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;font-weight:500;margin-bottom:14px;}
@@ -23,8 +24,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 .hero-title span{color:var(--gold);}
 .hero-sub{font-size:14px;color:rgba(255,255,255,0.45);max-width:380px;margin:0 auto;line-height:1.6;}
 
-.layout{display:grid;grid-template-columns:1fr 280px;gap:16px;width:100%;max-width:860px;animation:fadeUp 0.7s ease 0.15s both;}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:16px;width:100%;max-width:900px;animation:fadeUp 0.7s ease 0.15s both;}
 
+/* CHAT */
 .chat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;}
 .topbar{background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 18px;display:flex;align-items:center;gap:10px;}
 .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#D4A017,#B8860B);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy-dark);flex-shrink:0;}
@@ -33,11 +35,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 .sdot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
 .rbtn{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:5px 10px;font-size:12px;color:rgba(255,255,255,0.45);cursor:pointer;font-family:'DM Sans',sans-serif;}
 .rbtn:hover{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);}
-
 .msgs{flex:1;min-height:360px;max-height:420px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
 .msgs::-webkit-scrollbar{width:3px;}
 .msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
-
 .msg{display:flex;flex-direction:column;gap:3px;max-width:80%;animation:popIn 0.2s ease both;}
 .msg.user{align-self:flex-end;}
 .msg.rex{align-self:flex-start;}
@@ -46,17 +46,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 .msg.rex .bubble{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.08);border-bottom-left-radius:4px;}
 .mtime{font-size:11px;color:rgba(255,255,255,0.28);padding:0 4px;}
 .msg.user .mtime{text-align:right;}
-
 .typing-wrap{align-self:flex-start;display:flex;gap:5px;align-items:center;padding:11px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.08);border-radius:14px;border-bottom-left-radius:4px;}
 .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
 .tdot:nth-child(1){animation:bounce 1.2s 0s infinite;}
 .tdot:nth-child(2){animation:bounce 1.2s 0.2s infinite;}
 .tdot:nth-child(3){animation:bounce 1.2s 0.4s infinite;}
-
 .opts{padding:10px 14px;display:flex;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,0.06);}
 .opt{background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.25);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gold-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
 .opt:hover{background:rgba(212,160,23,0.2);}
-
 .inp-area{padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:8px;align-items:center;}
 .inp{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:9px 14px;font-size:13px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.15s;}
 .inp::placeholder{color:rgba(255,255,255,0.28);}
@@ -65,26 +62,74 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 .sbtn:hover{background:var(--gold-light);}
 .sbtn:disabled{background:rgba(255,255,255,0.1);cursor:not-allowed;}
 
-.right{display:flex;flex-direction:column;gap:14px;}
+/* PAINEL DIREITO */
+.right{display:flex;flex-direction:column;gap:12px;}
+
+/* FICHA */
 .fcard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
-.fhead{background:linear-gradient(135deg,#1A3D6E,#0F2D52);padding:13px 15px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.fhead{background:linear-gradient(135deg,#1A3D6E,#0F2D52);padding:12px 15px;border-bottom:1px solid rgba(255,255,255,0.08);}
 .ftitle{font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:2px;}
-.fname{font-size:12px;color:rgba(255,255,255,0.55);}
-.fbody{padding:12px 15px;display:flex;flex-direction:column;gap:7px;}
+.fname{font-size:13px;color:rgba(255,255,255,0.7);font-weight:500;}
+.fbody{padding:11px 14px;display:flex;flex-direction:column;gap:6px;}
 .frow{display:flex;justify-content:space-between;gap:8px;}
 .fkey{font-size:11px;color:rgba(255,255,255,0.3);font-weight:500;flex-shrink:0;}
-.fval{font-size:11px;color:rgba(255,255,255,0.2);font-style:italic;text-align:right;}
+.fval{font-size:11px;color:rgba(255,255,255,0.2);font-style:italic;text-align:right;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .fval.on{color:var(--gold-light);font-style:normal;font-weight:500;}
-.strack-wrap{margin-top:4px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);}
-.slabel{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;margin-bottom:7px;}
-.strack{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
-.sfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#1A3D6E,#D4A017);transition:width 0.6s ease;}
-.snum{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;margin-top:5px;}
-.sdesc{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;}
 
-.ecard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:13px 15px;}
-.etitle{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:11px;}
-.erow{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+/* BLOCO DE SCORE TRIPLO */
+.scard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;}
+.scard-head{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;}
+.scard-title{font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;font-weight:600;}
+.scard-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+
+/* TRÊS INDICADORES */
+.ind-row{display:flex;flex-direction:column;gap:4px;}
+.ind-label{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.5px;display:flex;justify-content:space-between;}
+.ind-label span{color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0;}
+.ind-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.ind-fill{height:100%;border-radius:2px;transition:width .7s ease,background .5s;}
+
+/* CLASSIFICAÇÃO FINAL */
+.class-final{margin-top:2px;padding:8px 10px;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all .3s;}
+.class-final.muito-alta{background:rgba(220,50,50,0.15);border:1px solid rgba(220,50,50,0.3);}
+.class-final.alta{background:rgba(212,160,23,0.13);border:1px solid rgba(212,160,23,0.3);}
+.class-final.media{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);}
+.class-final.baixa{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);}
+.class-icon{font-size:18px;flex-shrink:0;}
+.class-info{flex:1;}
+.class-txt{font-size:13px;font-weight:700;}
+.class-final.muito-alta .class-txt{color:#f87171;}
+.class-final.alta .class-txt{color:var(--gold-light);}
+.class-final.media .class-txt{color:var(--amber);}
+.class-final.baixa .class-txt{color:rgba(255,255,255,0.35);}
+.class-sla{font-size:10px;margin-top:1px;opacity:.7;}
+.class-final.muito-alta .class-sla{color:#f87171;}
+.class-final.alta .class-sla{color:var(--gold-light);}
+.class-final.media .class-sla{color:var(--amber);}
+.class-final.baixa .class-sla{color:rgba(255,255,255,0.3);}
+
+/* AÇÃO SUGERIDA */
+.acao-box{padding:7px 10px;border-radius:8px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:6px;line-height:1.4;}
+.acao-box.urgente{background:rgba(220,50,50,0.12);border:1px solid rgba(220,50,50,0.2);color:#f87171;}
+.acao-box.quente{background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.2);color:var(--gold-light);}
+.acao-box.nutrir{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);color:var(--amber);}
+.acao-box.frio{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.35);}
+
+/* MOTIVOS */
+.motivos-btn{width:100%;background:rgba(212,160,23,0.07);border:1px solid rgba(212,160,23,0.18);border-radius:8px;padding:6px 10px;font-size:11px;color:rgba(212,160,23,0.8);cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;transition:background .15s;display:flex;align-items:center;justify-content:space-between;}
+.motivos-btn:hover{background:rgba(212,160,23,0.12);}
+.motivos-panel{display:none;flex-direction:column;gap:8px;animation:slideIn .2s ease;}
+.motivos-panel.open{display:flex;}
+.motivos-section{display:flex;flex-direction:column;gap:4px;}
+.motivos-sec-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+.motivos-sec-title.pos{color:var(--green-bright);}
+.motivos-sec-title.neg{color:#f87171;}
+.motivo-item{font-size:11px;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:5px;line-height:1.4;}
+
+/* PROGRESSO */
+.ecard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px 14px;}
+.etitle{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.erow{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
 .erow:last-child{margin-bottom:0;}
 .ecircle{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.25);transition:all 0.4s;}
 .ecircle.done{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);}
@@ -93,9 +138,103 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 .etext.done{color:rgba(255,255,255,0.8);}
 .etext.active{color:var(--gold-light);}
 
-.disc{text-align:center;font-size:11px;color:rgba(255,255,255,0.18);margin-top:12px;}
+/* HISTÓRICO */
+.hcard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px 14px;}
+.htitle{font-size:10px;color:rgba(255,255,255,0.3);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.hitem{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;}
+.hitem:last-child{margin-bottom:0;}
+.hdot2{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);margin-top:4px;flex-shrink:0;transition:background .4s;}
+.hdot2.done{background:var(--gold);}
+.hdate{font-size:10px;color:rgba(255,255,255,0.25);flex-shrink:0;min-width:32px;}
+.htxt{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4;}
 
-@media(max-width:660px){.layout{grid-template-columns:1fr;}.right{display:grid;grid-template-columns:1fr 1fr;gap:12px;}}
+/* PAINEL CAPTAÇÃO (vendedor) */
+.cap-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;display:none;}
+.cap-card.ativo{display:block;}
+.cap-head{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;}
+.cap-title{font-size:10px;letter-spacing:1px;color:#C084FC;text-transform:uppercase;font-weight:600;}
+.cap-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+.cap-ind-label{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.5px;display:flex;justify-content:space-between;}
+.cap-ind-label span{color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0;}
+.cap-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.cap-fill{height:100%;border-radius:2px;transition:width .7s ease,background .5s;}
+.cap-class{margin-top:2px;padding:8px 10px;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all .3s;}
+.cap-class.premium{background:rgba(192,132,252,0.15);border:1px solid rgba(192,132,252,0.35);}
+.cap-class.estrategica{background:rgba(26,180,80,0.13);border:1px solid rgba(26,180,80,0.3);}
+.cap-class.regular{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);}
+.cap-class.baixa{background:rgba(220,50,50,0.1);border:1px solid rgba(220,50,50,0.2);}
+.cap-class-icon{font-size:18px;flex-shrink:0;}
+.cap-class-info{flex:1;}
+.cap-class-txt{font-size:13px;font-weight:700;}
+.cap-class.premium .cap-class-txt{color:#C084FC;}
+.cap-class.estrategica .cap-class-txt{color:#4ade80;}
+.cap-class.regular .cap-class-txt{color:var(--amber);}
+.cap-class.baixa .cap-class-txt{color:#f87171;}
+.cap-class-sla{font-size:10px;margin-top:1px;opacity:.7;}
+.cap-class.premium .cap-class-sla{color:#C084FC;}
+.cap-class.estrategica .cap-class-sla{color:#4ade80;}
+.cap-class.regular .cap-class-sla{color:var(--amber);}
+.cap-class.baixa .cap-class-sla{color:#f87171;}
+.cap-acao{padding:7px 10px;border-radius:8px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:6px;line-height:1.4;}
+.cap-acao.premium{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.2);color:#C084FC;}
+.cap-acao.estrategica{background:rgba(26,180,80,0.1);border:1px solid rgba(26,180,80,0.2);color:#4ade80;}
+.cap-acao.regular{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);color:var(--amber);}
+.cap-acao.baixa{background:rgba(220,50,50,0.08);border:1px solid rgba(220,50,50,0.15);color:#f87171;}
+
+/* MATCH ENGINE */
+.match-card-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;display:none;}
+.match-card-wrap.ativo{display:block;}
+.match-head{padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;}
+.match-head-title{font-size:10px;letter-spacing:1px;color:#818CF8;text-transform:uppercase;font-weight:600;}
+.match-head-sub{font-size:10px;color:rgba(255,255,255,0.3);}
+.match-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.match-item:last-child{border-bottom:none;}
+.match-score-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;}
+.msc-high{background:rgba(26,120,58,0.2);color:#4ade80;}
+.msc-mid{background:rgba(212,160,23,0.15);color:var(--gold-light);}
+.msc-low{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);}
+.match-info{flex:1;min-width:0;}
+.match-imovel{font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);}
+.match-detalhe{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;}
+.match-fits{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px;}
+.fit-ok{font-size:10px;padding:2px 6px;border-radius:8px;background:rgba(26,120,58,0.15);color:#4ade80;font-weight:500;}
+.fit-par{font-size:10px;padding:2px 6px;border-radius:8px;background:rgba(212,160,23,0.12);color:var(--gold-light);font-weight:500;}
+.match-action{font-size:11px;color:var(--gold-light);cursor:pointer;font-weight:600;flex-shrink:0;margin-top:12px;}
+.match-loading{padding:14px 13px;font-size:11px;color:rgba(129,140,248,0.7);display:flex;align-items:center;gap:7px;}
+.match-empty{padding:14px 13px;font-size:11px;color:rgba(255,255,255,0.25);text-align:center;}
+
+.disc{text-align:center;font-size:11px;color:rgba(255,255,255,0.18);margin-top:12px;}
+/* BADGE PRIORIZAÇÃO */
+.badge-prio{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;font-size:11px;font-weight:700;letter-spacing:.3px;margin-top:4px;}
+.badge-prio.ligar{background:rgba(220,50,50,0.18);border:1px solid rgba(220,50,50,0.35);color:#f87171;}
+.badge-prio.visita{background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.3);color:var(--gold-light);}
+.badge-prio.nutrir{background:rgba(26,180,80,0.12);border:1px solid rgba(26,180,80,0.25);color:#4ade80;}
+.badge-prio.arquivar{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);}
+
+/* MÓDULOS VENDEDOR EXTRAS */
+.vmod{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:11px 13px;margin-top:0;}
+.vmod-title{font-size:10px;color:rgba(192,132,252,0.8);text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:8px;}
+.vmod-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.vmod-lbl{font-size:11px;color:rgba(255,255,255,0.4);}
+.vmod-val{font-size:12px;font-weight:700;color:rgba(255,255,255,0.85);}
+.vmod-val.destaque{color:var(--gold-light);font-size:14px;}
+.vmod-val.verde{color:#4ade80;}
+.vmod-val.roxo{color:#C084FC;}
+.ilc-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin:6px 0 4px;}
+.ilc-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.ilc-label{font-size:10px;color:rgba(255,255,255,0.3);display:flex;justify-content:space-between;}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;}
+.prob-item{background:rgba(255,255,255,0.04);border-radius:8px;padding:7px 9px;text-align:center;}
+.prob-dias{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.prob-pct{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;color:#C084FC;}
+.fit-num{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;color:var(--gold-light);}
+.fit-txt{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4;margin-top:3px;}
+.analise-txt{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;font-style:italic;margin-top:4px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06);}
+.ilc-loading{font-size:11px;color:rgba(192,132,252,0.6);display:flex;align-items:center;gap:6px;}
+.ilc-spin{width:10px;height:10px;border:1.5px solid rgba(192,132,252,0.3);border-top-color:#C084FC;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:680px){.layout{grid-template-columns:1fr;}.right{display:grid;grid-template-columns:1fr 1fr;gap:12px;}}
 @media(max-width:420px){.right{grid-template-columns:1fr;}.msgs{min-height:260px;max-height:300px;}}
 </style>
 </head>
@@ -108,6 +247,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
 </div>
 
 <div class="layout">
+  <!-- CHAT -->
   <div class="chat-card">
     <div class="topbar">
       <div class="av">R</div>
@@ -124,7 +264,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
     </div>
   </div>
 
+  <!-- PAINEL DIREITO -->
   <div class="right">
+
+    <!-- FICHA -->
     <div class="fcard">
       <div class="fhead"><div class="ftitle">Ficha do lead</div><div class="fname" id="fname">Aguardando...</div></div>
       <div class="fbody">
@@ -135,57 +278,218 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy-dark);min-height:100
         <div class="frow"><span class="fkey">Faixa valor</span><span class="fval" id="fv">—</span></div>
         <div class="frow"><span class="fkey">Quartos</span><span class="fval" id="fq">—</span></div>
         <div class="frow"><span class="fkey">Financiamento</span><span class="fval" id="ff">—</span></div>
+        <div class="frow"><span class="fkey">FGTS</span><span class="fval" id="fg">—</span></div>
         <div class="frow"><span class="fkey">Urgência</span><span class="fval" id="fu">—</span></div>
         <div class="frow"><span class="fkey">Motivo</span><span class="fval" id="fm">—</span></div>
-        <div class="strack-wrap">
-          <div class="slabel">Score de qualificação</div>
-          <div class="strack"><div class="sfill" id="sfill" style="width:0%"></div></div>
-          <div class="snum" id="snum">0</div>
-          <div class="sdesc" id="sdesc">Aguardando dados</div>
+      </div>
+    </div>
+
+    <!-- SCORE TRIPLO (comprador) -->
+    <div class="scard" id="painel-comprador">
+      <div class="scard-head">
+        <span class="scard-title">Qualificação Rex AI</span>
+      </div>
+      <div class="scard-body">
+        <div class="ind-row">
+          <div class="ind-label">Intenção de compra <span id="ia-num">—</span></div>
+          <div class="ind-bar"><div class="ind-fill" id="ia-fill" style="width:0%"></div></div>
+        </div>
+        <div class="ind-row">
+          <div class="ind-label">Capacidade financeira <span id="ib-num">—</span></div>
+          <div class="ind-bar"><div class="ind-fill" id="ib-fill" style="width:0%"></div></div>
+        </div>
+        <div class="ind-row">
+          <div class="ind-label">Compatibilidade <span id="ic-num">—</span></div>
+          <div class="ind-bar"><div class="ind-fill" id="ic-fill" style="width:0%"></div></div>
+        </div>
+        <div class="class-final baixa" id="class-final">
+          <div class="class-icon" id="class-icon">⚪</div>
+          <div class="class-info">
+            <div class="class-txt" id="class-txt">Aguardando dados</div>
+            <div class="class-sla" id="class-sla">Preencha a conversa para classificar</div>
+          </div>
+        </div>
+        <div class="acao-box frio" id="acao-box">
+          <span id="acao-icon">🕐</span>
+          <span id="acao-txt">Ação sugerida disponível após qualificação</span>
+        </div>
+        <div id="badge-prio-wrap" style="display:none">
+          <span class="badge-prio arquivar" id="badge-prio">⚫ Arquivar</span>
+        </div>
+        <button class="motivos-btn" onclick="toggleMotivos()">
+          <span>💡 Motivos da classificação</span>
+          <span id="motivos-seta">▼</span>
+        </button>
+        <div class="motivos-panel" id="motivos-panel">
+          <div class="motivos-section" id="motivos-pos" style="display:none">
+            <div class="motivos-sec-title pos">✅ Fatores positivos</div>
+            <div id="motivos-pos-list"></div>
+          </div>
+          <div class="motivos-section" id="motivos-neg" style="display:none">
+            <div class="motivos-sec-title neg">⚠️ Fatores que reduzem a conversão</div>
+            <div id="motivos-neg-list"></div>
+          </div>
+          <div class="motivo-item" id="motivos-empty" style="color:rgba(255,255,255,0.25)">
+            <span>⏳</span><span>Responda mais perguntas para ver a análise</span>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- POTENCIAL DE CAPTAÇÃO (vendedor) -->
+    <div class="cap-card" id="painel-vendedor">
+      <div class="cap-head">
+        <span class="cap-title">Potencial de Captação</span>
+      </div>
+      <div class="cap-body">
+        <div class="ind-row">
+          <div class="cap-ind-label">Atratividade comercial <span id="ca-num">—</span></div>
+          <div class="cap-bar"><div class="cap-fill" id="ca-fill" style="width:0%"></div></div>
+        </div>
+        <div class="ind-row">
+          <div class="cap-ind-label">Facilidade de venda <span id="cb-num">—</span></div>
+          <div class="cap-bar"><div class="cap-fill" id="cb-fill" style="width:0%"></div></div>
+        </div>
+        <div class="ind-row">
+          <div class="cap-ind-label">Qualidade da captação <span id="cc-num">—</span></div>
+          <div class="cap-bar"><div class="cap-fill" id="cc-fill" style="width:0%"></div></div>
+        </div>
+        <div class="cap-class baixa" id="cap-class">
+          <div class="cap-class-icon" id="cap-icon">⏳</div>
+          <div class="cap-class-info">
+            <div class="cap-class-txt" id="cap-txt">Aguardando dados</div>
+            <div class="cap-class-sla" id="cap-sla">Preencha a conversa para avaliar</div>
+          </div>
+        </div>
+        <div class="cap-acao baixa" id="cap-acao">
+          <span id="cap-acao-icon">🕐</span>
+          <span id="cap-acao-txt">Análise disponível após qualificação</span>
+        </div>
+
+        <!-- MÓDULO: Probabilidade de Conversão (ILC via API) -->
+        <div class="vmod" id="mod-ilc" style="display:none">
+          <div class="vmod-title">Probabilidade de venda</div>
+          <div class="ilc-loading" id="ilc-loading"><div class="ilc-spin"></div>Calculando com IA...</div>
+          <div id="ilc-content" style="display:none">
+            <div class="vmod-row">
+              <span class="vmod-lbl">Índice de Liquidez (ILC)</span>
+              <span class="vmod-val roxo" id="ilc-num">—</span>
+            </div>
+            <div class="ilc-bar"><div class="ilc-fill" id="ilc-fill" style="width:0%"></div></div>
+            <div class="ilc-label"><span id="ilc-class">—</span><span id="ilc-tempo">—</span></div>
+            <div class="prob-grid">
+              <div class="prob-item"><div class="prob-dias">90 dias</div><div class="prob-pct" id="prob-90">—</div></div>
+              <div class="prob-item"><div class="prob-dias">180 dias</div><div class="prob-pct" id="prob-180">—</div></div>
+            </div>
+            <div class="analise-txt" id="ilc-analise"></div>
+          </div>
+        </div>
+
+        <!-- MÓDULO: Comissão Potencial -->
+        <div class="vmod" id="mod-comissao" style="display:none">
+          <div class="vmod-title">Ticket potencial</div>
+          <div class="vmod-row">
+            <span class="vmod-lbl">Comissão estimada (6%)</span>
+            <span class="vmod-val destaque" id="com-valor">—</span>
+          </div>
+          <div class="vmod-row">
+            <span class="vmod-lbl">Receita se vender em 90d</span>
+            <span class="vmod-val verde" id="com-90">—</span>
+          </div>
+        </div>
+
+        <!-- MÓDULO: Fit com Carteira -->
+        <div class="vmod" id="mod-fit" style="display:none">
+          <div class="vmod-title">Fit com carteira atual</div>
+          <div class="fit-num" id="fit-num">—</div>
+          <div class="fit-txt" id="fit-txt">compradores ativos procurando imóvel semelhante</div>
+        </div>
+        <button class="motivos-btn" onclick="toggleMotivosCap()" style="border-color:rgba(192,132,252,0.2);color:rgba(192,132,252,0.8);">
+          <span>💡 Motivos da avaliação</span>
+          <span id="cap-motivos-seta">▼</span>
+        </button>
+        <div class="motivos-panel" id="cap-motivos-panel">
+          <div class="motivos-section" id="cap-motivos-pos" style="display:none">
+            <div class="motivos-sec-title pos">✅ Pontos positivos</div>
+            <div id="cap-motivos-pos-list"></div>
+          </div>
+          <div class="motivos-section" id="cap-motivos-neg" style="display:none">
+            <div class="motivos-sec-title neg">⚠️ Fatores de risco</div>
+            <div id="cap-motivos-neg-list"></div>
+          </div>
+          <div class="motivo-item" id="cap-motivos-empty" style="color:rgba(255,255,255,0.25)">
+            <span>⏳</span><span>Responda mais perguntas para ver a avaliação</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATCH ENGINE (comprador) -->
+    <div class="match-card-wrap" id="mod-match">
+      <div class="match-head">
+        <span class="match-head-title">🔗 Match Engine</span>
+        <span class="match-head-sub" id="match-head-sub">imóveis compatíveis</span>
+      </div>
+      <div id="match-body">
+        <div class="match-loading" id="match-loading" style="display:none">
+          <div class="ilc-spin" style="border-color:rgba(129,140,248,0.3);border-top-color:#818CF8;"></div>
+          Buscando imóveis compatíveis...
+        </div>
+        <div class="match-empty" id="match-empty">Qualificação concluída para ver matches</div>
+        <div id="match-list"></div>
+      </div>
+    </div>
+
+    <!-- PROGRESSO -->
     <div class="ecard">
       <div class="etitle">Progresso</div>
       <div class="erow"><div class="ecircle active" id="e1">1</div><div class="etext active" id="et1">Identificação</div></div>
       <div class="erow"><div class="ecircle" id="e2">2</div><div class="etext" id="et2">Objetivo</div></div>
       <div class="erow"><div class="ecircle" id="e3">3</div><div class="etext" id="et3">Qualificação financeira</div></div>
-      <div class="erow"><div class="ecircle" id="e4">4</div><div class="etext" id="et4">Características</div></div>
+      <div class="erow"><div class="ecircle" id="e4">4</div><div class="etext" id="et4">Perfil e motivo</div></div>
     </div>
+
+    <!-- HISTÓRICO -->
+    <div class="hcard">
+      <div class="htitle">Histórico</div>
+      <div id="historico">
+        <div class="hitem"><div class="hdot2"></div><div class="hdate"></div><div class="htxt" style="color:rgba(255,255,255,0.2)">Aguardando conversa</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="disc">Demo Rex AI · Benhur Debastiani Teixeira · Osório RS</div>
+<div class="disc">Demo Rex AI v3.0 · Benhur Debastiani Teixeira · Osório RS</div>
 
 <script>
-// ESTADO
+// ── ESTADO ─────────────────────────────────────────────────────────
 let estado = {};
 let loading = false;
+let motivosPanelOpen = false;
+const historico = [];
 
 function getTime(){const n=new Date();return n.getHours()+':'+String(n.getMinutes()).padStart(2,'0');}
+function getDateStr(){const n=new Date();return String(n.getDate()).padStart(2,'0')+'/'+String(n.getMonth()+1).padStart(2,'0');}
 
-// FLUXO DE CONVERSA
+// ── FLUXO ─────────────────────────────────────────────────────────
 const FLUXO = [
-  // ETAPA 1 — IDENTIFICAÇÃO
   {
     id:'inicio',
     rex:'Olá! 👋 Seja bem-vindo! Sou o Rex, assistente virtual do corretor Carlos Mendes.\n\nEstou aqui para ajudá-lo a encontrar o imóvel ideal. Para começar, qual é o seu nome?',
-    etapa:1,
-    captura:null,
-    opts:[],
+    etapa:1, captura:'nome', opts:[],
     proximo:(inp)=>'objetivo'
   },
   {
     id:'objetivo',
-    rex:(e)=>`Prazer, ${e.nome}! 😊\n\nO que você está procurando?`,
-    etapa:1,
-    captura:'nome',
+    rex:(e)=>`Prazer, ${e.nome||'seja bem-vindo'}! 😊\n\nO que você está procurando?`,
+    etapa:1, captura:null,
     opts:['🏠 Quero comprar','🔑 Quero alugar','💰 Quero vender'],
     proximo:(inp)=>{
       const t=inp.toLowerCase();
-      if(t.includes('comprar')||t.includes('compra')) return 'tipo_comprar';
-      if(t.includes('alugar')||t.includes('aluguel')||t.includes('alugo')) return 'tipo_alugar';
-      if(t.includes('vender')||t.includes('vendo')) return 'vender_tipo';
+      if(t.includes('comprar')) return 'tipo_comprar';
+      if(t.includes('alugar')) return 'tipo_alugar';
+      if(t.includes('vender')) return 'vender_tipo';
       return 'tipo_comprar';
     }
   },
@@ -193,53 +497,153 @@ const FLUXO = [
   {
     id:'tipo_comprar',
     rex:'Ótimo! Qual tipo de imóvel você procura?',
-    etapa:2,
-    captura:'objetivo',
-    capturaValor:'Comprar',
+    etapa:2, captura:'objetivo', capturaValor:'Comprar',
     opts:['🏠 Casa','🏢 Apartamento','🌿 Terreno','🏪 Sala comercial'],
-    proximo:()=>'cidade_desejada'
+    proximo:(inp)=>{
+      const mapa={'Casa':'Casa','Apartamento':'Apartamento','Terreno':'Terreno','Sala comercial':'Sala comercial'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('tipo_imovel', key||inp.trim());
+      return 'cidade_desejada';
+    }
   },
   // ALUGAR
   {
     id:'tipo_alugar',
     rex:'Certo! Qual tipo de imóvel você procura para alugar?',
-    etapa:2,
-    captura:'objetivo',
-    capturaValor:'Alugar',
+    etapa:2, captura:'objetivo', capturaValor:'Alugar',
     opts:['🏠 Casa','🏢 Apartamento','🏪 Sala comercial'],
-    proximo:()=>'cidade_desejada'
+    proximo:(inp)=>{
+      const mapa={'Casa':'Casa','Apartamento':'Apartamento','Sala comercial':'Sala comercial'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('tipo_imovel', key||inp.trim());
+      return 'cidade_desejada';
+    }
   },
   // VENDER
   {
     id:'vender_tipo',
     rex:'Entendido! Que tipo de imóvel você deseja vender?',
-    etapa:2,
-    captura:'objetivo',
-    capturaValor:'Vender',
+    etapa:2, captura:'objetivo', capturaValor:'Vender',
     opts:['🏠 Casa','🏢 Apartamento','🌿 Terreno','🏪 Sala comercial'],
-    proximo:()=>'vender_cidade'
+    proximo:(inp)=>{
+      const mapa={'Casa':'Casa','Apartamento':'Apartamento','Terreno':'Terreno','Sala comercial':'Sala comercial'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('tipo_imovel', key||inp.trim());
+      mostrarPainelVendedor();
+      return 'vender_cidade';
+    }
   },
   {
     id:'vender_cidade',
-    rex:(e)=>`${e.tipo_imovel ? e.tipo_imovel+' anotado!' : 'Certo!'} Em qual cidade e bairro está localizado o imóvel?`,
-    etapa:2,
-    captura:'tipo_imovel',
-    opts:[],
-    proximo:()=>'vender_valor'
+    rex:(e)=>`${e.tipo_imovel||'Imóvel'} anotado!\n\nEm qual cidade e bairro está o imóvel?`,
+    etapa:2, captura:null, opts:[],
+    proximo:(inp)=>{ setFicha('cidade_desejada', inp.trim()); return 'vender_valor'; }
   },
   {
     id:'vender_valor',
-    rex:'Qual o valor que você espera pelo imóvel?',
-    etapa:3,
-    captura:'cidade_desejada',
-    opts:[],
-    proximo:()=>'vender_fim'
+    rex:'Qual o valor que você espera pelo imóvel? (Digite o valor desejado)',
+    etapa:3, captura:null, opts:[],
+    proximo:(inp)=>{ setFicha('faixa_valor', inp.trim()); return 'vender_preco_mercado'; }
+  },
+  {
+    id:'vender_preco_mercado',
+    rex:'Como você avalia o preço do seu imóvel em relação ao mercado atual?',
+    etapa:3, captura:null,
+    opts:['📊 Dentro do preço de mercado','📈 Um pouco acima do mercado','💬 Estou aberto a avaliação profissional','💰 Meu preço é fixo'],
+    proximo:(inp)=>{
+      const mapa={'Dentro do preço':'compativel','Um pouco acima':'levemente_acima','Aberto a avaliação':'aberto_avaliacao','preço é fixo':'muito_acima'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('preco_mercado', key?mapa[key]:inp.trim());
+      return 'vender_aceita_financ';
+    }
+  },
+  {
+    id:'vender_aceita_financ',
+    rex:'O imóvel aceita propostas com financiamento bancário?',
+    etapa:3, captura:null,
+    opts:['✅ Aceito qualquer forma de pagamento','🏦 Aceito financiamento com condições','💳 Prefiro somente à vista'],
+    proximo:(inp)=>{
+      const mapa={'qualquer':'qualquer','com condições':'com_condicoes','somente à vista':'somente_vista'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('vai_financiar', key?mapa[key]:inp.trim());
+      return 'vender_conservacao';
+    }
+  },
+  {
+    id:'vender_conservacao',
+    rex:'Qual o estado de conservação do imóvel?',
+    etapa:3, captura:null,
+    opts:['⭐ Excelente — pronto para morar','👍 Bom — pequenos reparos','🔧 Regular — precisa de reforma','⚠️ Precisa de reforma significativa'],
+    proximo:(inp)=>{
+      const mapa={'Excelente':'excelente','Bom':'bom','Regular':'regular','reforma significativa':'ruim'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('conservacao', key?mapa[key]:inp.trim());
+      return 'vender_documentacao';
+    }
+  },
+  {
+    id:'vender_documentacao',
+    rex:'Como está a documentação do imóvel?',
+    etapa:4, captura:null,
+    opts:['✅ Completa e em ordem','📋 Ok, com pequenas pendências','📂 Incompleta — precisa regularizar','⚠️ Tem problemas jurídicos'],
+    proximo:(inp)=>{
+      const mapa={'Completa':'completa','pequenas pendências':'pendencias_menores','Incompleta':'incompleta','problemas jurídicos':'problemas_serios'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('documentacao', key?mapa[key]:inp.trim());
+      return 'vender_exclusividade';
+    }
+  },
+  {
+    id:'vender_exclusividade',
+    rex:'Você trabalharia com exclusividade com nossa imobiliária?',
+    etapa:4, captura:null,
+    opts:['🤝 Sim, exclusividade total','⭐ Dou preferência a vocês','🔄 Estou em várias imobiliárias','🏷️ Também vendo por conta própria'],
+    proximo:(inp)=>{
+      const mapa={'exclusividade total':'total','Dou preferência':'preferencia','várias imobiliárias':'sem','conta própria':'vende_direto'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('exclusividade', key?mapa[key]:inp.trim());
+      return 'vender_urgencia';
+    }
+  },
+  {
+    id:'vender_urgencia',
+    rex:'Qual a sua urgência para vender?',
+    etapa:4, captura:null,
+    opts:['🔥 Urgente — preciso vender logo','📅 Tenho até 3 meses','🗓️ Até 6 meses','🧘 Sem pressa — aguardo a oferta certa'],
+    proximo:(inp)=>{
+      const mapa={'Urgente':'urgente','3 meses':'3_meses','6 meses':'6_meses','Sem pressa':'sem_pressa'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      setFicha('urgencia', key?mapa[key]:inp.trim());
+      return 'vender_motivacao';
+    }
+  },
+  {
+    id:'vender_motivacao',
+    rex:'Qual o principal motivo da venda?',
+    etapa:4, captura:null,
+    opts:['💸 Necessidade financeira','🏙️ Mudança de cidade','👨‍👩‍👧 Separação / inventário','🏠 Comprei outro imóvel','📈 Realizando investimento','🔼 Upgrade para imóvel maior','🧪 Testando o mercado'],
+    proximo:(inp)=>{
+      const mapa={'Necessidade':'divida','Mudança':'mudanca','Separação':'separacao','Comprei outro':'comprou_outro','Realizando':'investidor','Upgrade':'upgrade','Testando':'testando'};
+      const key=Object.keys(mapa).find(k=>inp.includes(k));
+      const val=key?mapa[key]:inp.trim();
+      setFicha('motivo', val);
+      addHistorico('Avaliação de captação concluída pelo Rex');
+      return 'vender_fim';
+    }
   },
   {
     id:'vender_fim',
-    rex:(e)=>`Perfeito! Recebi todas as informações.\n\n📋 Resumo:\n• Objetivo: Vender\n• Local: ${e.cidade_desejada||'informado'}\n• Valor pretendido: ${e.faixa_valor||'informado'}\n\nO corretor Carlos Mendes entrará em contato em breve para agendar a avaliação do imóvel! 🏡`,
-    etapa:4,
-    captura:'faixa_valor',
+    rex:(e)=>{
+      const res=calcCaptacao();
+      const clasLabels={premium:'🏆 CAPTAÇÃO PREMIUM',estrategica:'🟢 CAPTAÇÃO ESTRATÉGICA',regular:'🟡 CAPTAÇÃO REGULAR',baixa:'🔴 BAIXA PRIORIDADE'};
+      const urgLabel={'urgente':'Urgente','3_meses':'Até 3 meses','6_meses':'Até 6 meses','sem_pressa':'Sem pressa'}[e.urgencia]||e.urgencia||'—';
+      const finLabel={'qualquer':'Aceita qualquer forma','com_condicoes':'Com condições','somente_vista':'Somente à vista'}[e.vai_financiar]||'—';
+      const consLabel={'excelente':'Excelente','bom':'Bom','regular':'Regular','ruim':'Precisa reforma'}[e.conservacao]||'—';
+      const docLabel={'completa':'Completa','pendencias_menores':'Pendências menores','incompleta':'Incompleta','problemas_serios':'⚠️ Problemas jurídicos'}[e.documentacao]||'—';
+      const excLabel={'total':'Exclusividade total','preferencia':'Preferência','sem':'Sem exclusividade','vende_direto':'Vende por conta própria'}[e.exclusividade]||'—';
+      return `Avaliação concluída! 📊\n\n${clasLabels[res.classificacao]||'—'}\n\n🏠 ${e.tipo_imovel||'Imóvel'} — ${e.cidade_desejada||'—'}\n💰 Valor: ${e.faixa_valor||'—'}\n⚡ Urgência: ${urgLabel}\n💳 Pagamento: ${finLabel}\n🔑 Exclusividade: ${excLabel}\n🏗️ Conservação: ${consLabel}\n📋 Documentação: ${docLabel}\n\nO corretor Carlos Mendes entrará em contato para agendar a visita de avaliação! 🤝`;
+    },
+    etapa:4, captura:null,
     opts:['↺ Nova consulta'],
     proximo:()=>'inicio'
   },
@@ -247,105 +651,521 @@ const FLUXO = [
   {
     id:'cidade_desejada',
     rex:(e)=>`${e.tipo_imovel||'Imóvel'} anotado! Em qual cidade você prefere?`,
-    etapa:2,
-    captura:'tipo_imovel',
-    opts:['Porto Alegre','Canoas','Novo Hamburgo','Gravataí','Cachoeirinha'],
-    proximo:()=>'bairro'
+    etapa:2, captura:null,
+    opts:['Porto Alegre','Balneário Camboriú','Florianópolis','Gramado','Novo Hamburgo'],
+    proximo:(inp)=>{
+      setFicha('cidade_desejada', inp.trim());
+      return 'bairro';
+    }
   },
   {
     id:'bairro',
     rex:(e)=>`${e.cidade_desejada||'Cidade'} anotado! Tem algum bairro de preferência?`,
-    etapa:2,
-    captura:'cidade_desejada',
+    etapa:2, captura:null,
     opts:['Menino Deus','Moinhos de Vento','Petrópolis','Independência','Sem preferência'],
-    proximo:()=>'faixa_valor'
+    proximo:(inp)=>{
+      setFicha('bairro_desejado', inp.trim());
+      return 'faixa_valor';
+    }
   },
   {
     id:'faixa_valor',
-    rex:(e)=>`${e.objetivo==='Alugar'?'Qual o valor máximo de aluguel?':'Qual a faixa de valor do imóvel?'}`,
-    etapa:3,
-    captura:'bairro_desejado',
-    opts:e=>e.objetivo==='Alugar'
+    rex:(e)=>`${e.objetivo==='Alugar'?'Qual o valor máximo de aluguel?':'Qual a faixa de investimento?'}`,
+    etapa:3, captura:null,
+    opts:(e)=>e.objetivo==='Alugar'
       ?['Até R$ 2.000/mês','R$ 2.000–3.500/mês','R$ 3.500–6.000/mês','Acima R$ 6.000/mês']
       :['Até R$ 200 mil','R$ 200–400 mil','R$ 400–700 mil','Acima R$ 700 mil'],
-    proximo:()=>'quartos'
+    proximo:(inp)=>{
+      setFicha('faixa_valor', inp.trim());
+      const tipo=(estado.tipo_imovel||'').toLowerCase();
+      // Terreno e Sala comercial: não pergunta quartos
+      if(tipo.includes('terreno')) return 'financiamento';
+      if(tipo.includes('sala')) return 'pecas';
+      return 'quartos';
+    }
   },
   {
     id:'quartos',
     rex:'Quantos quartos você precisa?',
-    etapa:3,
-    captura:'faixa_valor',
-    opts:['1 quarto','2 quartos','3 quartos','4 ou mais'],
-    proximo:(inp,e)=>e.objetivo==='Alugar'?'urgencia':'financiamento'
+    etapa:3, captura:null,
+    opts:['1 quarto','2 quartos','3 quartos','4 ou mais','Sem preferência'],
+    proximo:(inp,e)=>{
+      const v=inp.replace(/[^\w\s]/g,'').trim();
+      setFicha('quartos', v||inp.trim());
+      return e.objetivo==='Alugar'?'urgencia':'financiamento';
+    }
+  },
+  {
+    id:'pecas',
+    rex:'Quantas peças (salas/ambientes) você precisa?',
+    etapa:3, captura:null,
+    opts:['1 sala','2 salas','3 ou mais salas','Aberto/Salão único','Sem preferência'],
+    proximo:(inp,e)=>{
+      setFicha('quartos', inp.trim()); // reutiliza campo quartos como "peças"
+      return e.objetivo==='Alugar'?'urgencia':'financiamento';
+    }
   },
   {
     id:'financiamento',
-    rex:'Vai precisar de financiamento?',
-    etapa:3,
-    captura:'quartos',
-    opts:['Sim, vou financiar','Não, à vista','Talvez, ainda avaliando'],
-    proximo:()=>'fgts'
+    rex:'Como pretende realizar o pagamento?',
+    etapa:3, captura:null,
+    opts:['💳 À vista','✅ Financiamento já aprovado','🏦 Vou financiar','🤔 Ainda estou avaliando'],
+    proximo:(inp)=>{
+      const mapa = {
+        'À vista':                  'vista',
+        'Financiamento já aprovado':'aprovado',
+        'Vou financiar':            'financiar',
+        'Ainda estou avaliando':    'avaliando',
+      };
+      const key = Object.keys(mapa).find(k => inp.includes(k));
+      const val = key ? mapa[key] : inp.trim();
+      setFicha('vai_financiar', val);
+      // Se já tem aprovado ou à vista, FGTS não é relevante para aprovação — pular
+      if(val==='vista' || val==='aprovado'){
+        setFicha('tem_fgts','nao_aplicavel');
+        return 'urgencia';
+      }
+      return 'fgts';
+    }
   },
   {
     id:'fgts',
-    rex:'Possui FGTS disponível para usar?',
-    etapa:3,
-    captura:'vai_financiar',
-    opts:['Sim, tenho FGTS','Não tenho','Não sei ainda'],
-    proximo:()=>'urgencia'
+    rex:'Possui FGTS disponível para usar como entrada?',
+    etapa:3, captura:null,
+    opts:['✅ Sim, tenho FGTS','❌ Não tenho','🤷 Não sei ainda'],
+    proximo:(inp)=>{
+      const mapa = {
+        'Sim, tenho FGTS': 'sim',
+        'Não tenho':       'nao',
+        'Não sei ainda':   'nao_sabe',
+      };
+      const key = Object.keys(mapa).find(k => inp.includes(k));
+      setFicha('tem_fgts', key ? mapa[key] : inp.trim());
+      return 'urgencia';
+    }
   },
   {
     id:'urgencia',
     rex:'Qual a sua urgência para fechar negócio?',
-    etapa:4,
-    captura:'tem_fgts',
-    opts:['Imediatamente','Até 3 meses','Até 6 meses','Apenas pesquisando'],
-    proximo:()=>'motivo'
+    etapa:4, captura:null,
+    opts:['🔥 Imediatamente','📅 Até 3 meses','🗓️ Até 6 meses','👀 Apenas pesquisando'],
+    proximo:(inp)=>{
+      const mapa = {
+        'Imediatamente':    'imediatamente',
+        'Até 3 meses':      '3 meses',
+        'Até 6 meses':      '6 meses',
+        'Apenas pesquisando':'pesquisando',
+      };
+      const key = Object.keys(mapa).find(k => inp.includes(k));
+      setFicha('urgencia', key ? mapa[key] : inp.trim());
+      return 'motivo';
+    }
   },
   {
     id:'motivo',
-    rex:'Qual o principal motivo da busca?',
-    etapa:4,
-    captura:'urgencia',
-    opts:['Primeiro imóvel','Casamento/família','Investimento','Mudança de cidade','Aposentadoria'],
-    proximo:()=>'fim'
+    rex:(e)=>{
+      const tipo=(e.tipo_imovel||'').toLowerCase();
+      if(tipo.includes('sala')||tipo.includes('comercial')||tipo.includes('terreno')){
+        return 'Qual o principal objetivo desta aquisição?';
+      }
+      return 'Qual o principal motivo da sua busca?';
+    },
+    etapa:4, captura:null,
+    opts:(e)=>{
+      const tipo=(e.tipo_imovel||'').toLowerCase();
+      if(tipo.includes('sala')||tipo.includes('comercial')){
+        return ['🏢 Sede própria do negócio','💰 Investimento/Renda','🔄 Expansão da empresa','🚀 Novo empreendimento','🌅 Aposentadoria'];
+      }
+      if(tipo.includes('terreno')){
+        return ['🏗️ Construção própria','💰 Investimento','🏘️ Empreendimento imobiliário','🌅 Aposentadoria','🏠 Primeiro imóvel'];
+      }
+      return ['💍 Casamento/família','👶 Filho chegando','🏙️ Mudança de cidade','🏠 Primeiro imóvel','💰 Investimento','🌅 Aposentadoria'];
+    },
+    proximo:(inp)=>{
+      const mapa = {
+        'Casamento':'casamento', 'Filho chegando':'filho',
+        'Mudança':'mudanca',     'Primeiro imóvel':'primeiro',
+        'Investimento':'investimento', 'Aposentadoria':'aposentadoria',
+        'Sede':'sede_propria',   'Expansão':'expansao',
+        'Novo empreendimento':'empreendimento', 'Construção':'construcao',
+        'Empreendimento imobiliário':'empreendimento_imob',
+        'Renda':'investimento',
+      };
+      const key = Object.keys(mapa).find(k => inp.includes(k));
+      setFicha('motivo', key ? mapa[key] : inp.trim());
+      addHistorico('Qualificação concluída pelo Rex');
+      return 'fim';
+    }
   },
   {
     id:'fim',
-    rex:(e)=>`Perfeito, ${e.nome||''}! Coletei todas as informações. 🎉\n\nAqui está o resumo do seu perfil:\n\n🏠 ${e.objetivo||'Comprar'} • ${e.tipo_imovel||'imóvel'}\n📍 ${e.cidade_desejada||''} — ${e.bairro_desejado||''}\n💰 ${e.faixa_valor||''} • ${e.quartos||''}\n⚡ Urgência: ${e.urgencia||''}\n💡 Motivo: ${e.motivo||''}\n\nO corretor Carlos Mendes entrará em contato em breve com as melhores opções para você! 🤝`,
-    etapa:4,
-    captura:'motivo',
+    rex:(e)=>{
+      const res=calcScore();
+      const clasLabel={muito_alta:'🔥 MUITO ALTA',alta:'🟠 ALTA',media:'🟡 MÉDIA',baixa:'⚪ BAIXA'}[res.classificacao]||'—';
+      // Disparar Match Engine para compradores
+      if((e.objetivo||'').toLowerCase()!=='vender'){
+        setTimeout(()=>mostrarMatch(), 800);
+      }
+      // Labels legíveis para os valores normalizados
+      const finLabel={'vista':'À vista','aprovado':'Financiamento aprovado','financiar':'Vai financiar','avaliando':'Avaliando'}[e.vai_financiar]||e.vai_financiar||'—';
+      const fgtsLabel={'sim':'Sim','nao':'Não','nao_sabe':'Não sabe','nao_aplicavel':'—'}[e.tem_fgts]||'—';
+      const urgLabel={'imediatamente':'Imediatamente','3 meses':'Até 3 meses','6 meses':'Até 6 meses','pesquisando':'Pesquisando'}[e.urgencia]||e.urgencia||'—';
+      const motLabel={'casamento':'Casamento/família','filho':'Filho chegando','mudanca':'Mudança de cidade','primeiro':'Primeiro imóvel','investimento':'Investimento','aposentadoria':'Aposentadoria'}[e.motivo]||e.motivo||'—';
+      const isAlugar=(e.objetivo||'').toLowerCase()==='alugar';
+      const linhaFin = isAlugar ? '' : `\n💳 ${finLabel}${fgtsLabel!=='—'?' • FGTS: '+fgtsLabel:''}`;
+      return `Perfeito, ${e.nome||''}! Qualificação concluída. 🎉\n\n📊 Classificação: ${clasLabel}\n\n🏠 ${e.objetivo||'Comprar'} • ${e.tipo_imovel||'—'}\n📍 ${e.cidade_desejada||'—'} — ${e.bairro_desejado||'—'}\n💰 ${e.faixa_valor||'—'} • ${e.quartos||'—'}${linhaFin}\n⚡ Urgência: ${urgLabel} • Motivo: ${motLabel}\n\nO corretor Carlos Mendes entrará em contato em breve! 🤝`;
+    },
+    etapa:4, captura:null,
     opts:['↺ Nova consulta'],
     proximo:()=>'inicio'
   },
 ];
 
-const fluxoMap = {};
+const fluxoMap={};
 FLUXO.forEach(f=>fluxoMap[f.id]=f);
+let passoAtual='inicio';
 
-let passoAtual = 'inicio';
-
-function setFicha(key, val){
+// ── SETFICHA ──────────────────────────────────────────────────────
+function setFicha(key,val){
   if(!val||val==='—') return;
-  estado[key] = val;
-  const map={nome:'fname',objetivo:'fo',tipo_imovel:'ft',cidade_desejada:'fc',bairro_desejado:'fb',faixa_valor:'fv',quartos:'fq',vai_financiar:'ff',urgencia:'fu',motivo:'fm'};
+  estado[key]=val;
+  const map={nome:'fname',objetivo:'fo',tipo_imovel:'ft',cidade_desejada:'fc',bairro_desejado:'fb',faixa_valor:'fv',quartos:'fq',vai_financiar:'ff',tem_fgts:'fg',urgencia:'fu',motivo:'fm'};
   if(map[key]){
     const el=document.getElementById(map[key]);
     if(el){el.textContent=val;el.className='fval on';}
   }
-  if(key==='nome') document.getElementById('fname').textContent=val;
-  updateScore();
+  if(key==='nome'){
+    document.getElementById('fname').textContent=val;
+    addHistorico('Lead iniciou conversa com Rex');
+  }
+  if(key==='objetivo') addHistorico('Objetivo: '+val);
+  if(key==='urgencia'){
+    const u=val.toLowerCase();
+    if(u==='urgente'||u==='imediatamente') addHistorico('Urgência alta declarada');
+    else addHistorico('Urgência: '+val);
+  }
+  // Chamar o sistema correto baseado no objetivo
+  const obj=(estado.objetivo||'').toLowerCase();
+  if(obj==='vender'){
+    updateCaptacao();
+  } else {
+    updateScore();
+  }
 }
 
+// ══════════════════════════════════════════════════════════════════
+// METODOLOGIA v3.0 — SCORE TRIPLO
+// ══════════════════════════════════════════════════════════════════
+
+function calcScore(){
+  const e=estado;
+  const pos=[], neg=[];
+
+  // Valores já normalizados pelo mapeamento direto do fluxo:
+  // vai_financiar: 'vista' | 'aprovado' | 'financiar' | 'avaliando'
+  // tem_fgts:      'sim' | 'nao' | 'nao_sabe'
+  // urgencia:      'imediatamente' | '3 meses' | '6 meses' | 'pesquisando'
+  // motivo:        'casamento' | 'filho' | 'mudanca' | 'primeiro' | 'investimento' | 'aposentadoria'
+
+  const mot = (e.motivo||'').toLowerCase();
+  const urg = (e.urgencia||'').toLowerCase();
+  const fin = (e.vai_financiar||'').toLowerCase();
+  const fgt = (e.tem_fgts||'').toLowerCase();
+  const obj = (e.objetivo||'').toLowerCase();
+  const bairro = (e.bairro_desejado||'').toLowerCase();
+  const qts = (e.quartos||'').toLowerCase();
+  const temFgts = fgt === 'sim';
+
+  // ── INDICADOR A — INTENÇÃO DE COMPRA ─────────────────────────
+  let ptsA = 0;
+
+  // Motivo
+  if(mot==='casamento'){
+    ptsA+=40; pos.push('Casamento/família — data-limite real, maior taxa de fechamento');
+  } else if(mot==='filho'){
+    ptsA+=37; pos.push('Filho chegando — necessidade concreta e urgente');
+  } else if(mot==='mudanca'){
+    ptsA+=35; pos.push('Mudança de cidade — prazo externo definido');
+  } else if(mot==='primeiro'){
+    ptsA+=20; pos.push('Primeiro imóvel — motivação real');
+  } else if(mot==='aposentadoria'){
+    ptsA+=16; pos.push('Aposentadoria declarada como motivo');
+  } else if(mot==='investimento'){
+    if(fin==='vista'){
+      ptsA+=35; pos.push('Investidor à vista — decisão racional, fecha rápido quando o número fecha');
+      estado._investidor_avista = true;
+    } else {
+      ptsA+=12; neg.push('Investimento: fecha somente se o número for atrativo — sem urgência emocional');
+    }
+  } else if(mot==='sede_propria'||mot==='expansao'){
+    ptsA+=32; pos.push('Sede própria / expansão — necessidade concreta do negócio');
+  } else if(mot==='empreendimento'||mot==='empreendimento_imob'){
+    ptsA+=28; pos.push('Empreendimento — decisão estratégica com potencial de fechamento');
+  } else if(mot==='construcao'){
+    ptsA+=25; pos.push('Construção própria — projeto definido');
+  } else if(e.motivo){ ptsA+=8; }
+
+  // Urgência
+  if(urg==='imediatamente'){
+    ptsA+=22; pos.push('Urgência imediata declarada (+22)');
+  } else if(urg==='3 meses'){
+    ptsA+=13; pos.push('Prazo de até 3 meses (+13)');
+  } else if(urg==='6 meses'){
+    ptsA+=5;  pos.push('Prazo de até 6 meses (+5)');
+  } else if(urg==='pesquisando'){
+    neg.push('Apenas pesquisando — sem prazo ou compromisso declarado');
+  }
+
+  // Sinais de comprometimento
+  if(e.cidade_desejada && e.bairro_desejado && !bairro.includes('sem') && !bairro.includes('prefer')){
+    ptsA+=5; pos.push('Bairro específico definido — pesquisou e tem preferência concreta');
+  }
+  if(e.quartos && !qts.includes('sem') && !qts.includes('prefer')){
+    ptsA+=3; pos.push('Número de quartos definido');
+  } else if(e.faixa_valor){
+    neg.push('Número de quartos não informado');
+  }
+
+  const indA = Math.min(100, ptsA);
+
+  // ── INDICADOR B — CAPACIDADE FINANCEIRA ──────────────────────
+  let ptsB = 0, tetoB = 100;
+
+  if(obj==='alugar'){
+    // Aluguel: bloco B neutro — não avalia capacidade de compra
+    ptsB = 40; tetoB = 100;
+    if(e.faixa_valor){ ptsB+=12; pos.push('Faixa de aluguel definida (+12)'); }
+  } else {
+    if(fin==='vista'){
+      ptsB+=60; tetoB=100; pos.push('Pagamento à vista — elimina dependência bancária');
+    } else if(fin==='aprovado'){
+      ptsB+=52; tetoB=100; pos.push('Financiamento já aprovado — banco confirmou viabilidade');
+    } else if(fin==='financiar'){
+      if(temFgts){
+        ptsB+=24; tetoB=78; pos.push('FGTS disponível — entrada viável para o financiamento');
+      } else {
+        ptsB+=8; tetoB=45; neg.push('Vai financiar sem entrada declarada — aprovação bancária em risco');
+      }
+    } else if(fin==='avaliando'){
+      ptsB+=4; tetoB=35; neg.push('Forma de pagamento ainda indefinida');
+    }
+
+    // FGTS bônus — só relevante quando financiamento é necessário
+    // Para aprovado e à vista, FGTS não muda nada — não bonifica nem penaliza
+    if(fin==='financiar'){
+      // Já tratado acima com tetoB — sem bônus adicional
+    } else if(fin==='vista' || fin==='aprovado' || fgt==='nao_aplicavel'){
+      // FGTS irrelevante — pagamento não depende de entrada
+    } else if(temFgts){
+      // Tem FGTS mas está em situação indefinida
+      ptsB+=5; pos.push('FGTS disponível — pode auxiliar em eventual financiamento');
+    } else if(fgt==='nao'){
+      // Sem FGTS e sem forma clara de pagamento — penaliza levemente
+      neg.push('Sem FGTS declarado');
+    }
+
+    if(e.faixa_valor){ ptsB+=12; pos.push('Faixa de investimento definida (+12)'); }
+  }
+
+  const indB = Math.min(tetoB, ptsB);
+  if(tetoB < 100 && fin==='financiar'){
+    neg.push('Capacidade financeira com teto — entrada ou aprovação bancária não confirmada');
+  }
+
+  // ── INDICADOR C — COMPATIBILIDADE ────────────────────────────
+  let ptsC = 0, fatorC = 1.0;
+  const portfolio = ['porto alegre','balneário camboriú','florianópolis','gramado','novo hamburgo'];
+  const cidade = (e.cidade_desejada||'').toLowerCase();
+  const cidadeOk = portfolio.some(c => cidade.includes(c));
+
+  if(cidadeOk){
+    if(e.bairro_desejado && !bairro.includes('sem') && !bairro.includes('prefer')){
+      ptsC+=35; pos.push('Cidade e bairro dentro do portfólio ativo');
+    } else {
+      ptsC+=28; pos.push('Cidade no portfólio — bairro flexível');
+    }
+  } else if(e.cidade_desejada){
+    ptsC+=10; neg.push('Cidade pode estar fora do raio principal de atuação');
+    fatorC = 0.75;
+  }
+
+  if(e.tipo_imovel){ ptsC+=20; pos.push('Tipo de imóvel disponível no portfólio'); }
+  if(e.faixa_valor){ ptsC+=18; pos.push('Faixa de valor compatível com o portfólio'); }
+  // Quartos só é relevante para casa/apartamento
+  const tipoStr=(e.tipo_imovel||'').toLowerCase();
+  const tipoComQuartos=!tipoStr.includes('terreno')&&!tipoStr.includes('sala')&&!tipoStr.includes('comercial');
+  if(tipoComQuartos && e.quartos && !qts.includes('sem')){ ptsC+=12; }
+
+  const indC = Math.min(100, Math.round(ptsC * fatorC));
+
+  // ── SCORE COMPOSTO ────────────────────────────────────────────
+  let scoreFinal = Math.round((indA*0.38) + (indB*0.42) + (indC*0.20));
+
+  // ── OVERRIDES ────────────────────────────────────────────────
+  // Override 1: sem capacidade financeira confirmada → máximo Média
+  if(tetoB<=45 && fin==='financiar' && scoreFinal>59){
+    scoreFinal=59;
+    neg.push('Teto financeiro aplicado — entrada ou aprovação não confirmada');
+  }
+  // Override 2: pesquisando puro → sempre Baixa
+  if(urg==='pesquisando' && ptsA < 20){
+    scoreFinal = Math.min(scoreFinal, 34);
+  }
+  // Override 3: investidor à vista → mínimo Alta
+  if(estado._investidor_avista && scoreFinal < 60){
+    scoreFinal = 60;
+    pos.push('Override: investidor à vista — classificação mínima garantida: Alta');
+  }
+  // Override 4: à vista + urgência imediata → mínimo Alta
+  if(fin==='vista' && urg==='imediatamente' && scoreFinal < 60){
+    scoreFinal = 60;
+    pos.push('Override: pagamento à vista + urgência imediata — mínimo: Alta');
+  }
+  // Override 5: financiamento aprovado + motivo urgente → mínimo Média
+  if(fin==='aprovado' && (mot==='casamento'||mot==='filho'||mot==='mudanca') && scoreFinal < 35){
+    scoreFinal = 35;
+  }
+  // Override 6: à vista OU aprovado + motivo urgente + imediato + portfólio ok → Muito Alta
+  const pagamentoForte = fin==='vista' || fin==='aprovado';
+  const motivoUrgente  = mot==='casamento'||mot==='filho'||mot==='mudanca';
+  if(pagamentoForte && motivoUrgente && urg==='imediatamente' && indC>=60){
+    if(scoreFinal < 80){
+      scoreFinal = 80;
+      pos.push('Perfil completo: pagamento confirmado + motivo urgente + imediatamente + portfólio compatível → Muito Alta');
+    }
+  }
+  // Override 5: financiamento aprovado + motivo urgente → mínimo Média
+  if(fin==='aprovado' && (mot==='casamento'||mot==='filho'||mot==='mudanca') && scoreFinal < 35){
+    scoreFinal = 35;
+  }
+
+  let classificacao;
+  if(scoreFinal>=80)      classificacao='muito_alta';
+  else if(scoreFinal>=60) classificacao='alta';
+  else if(scoreFinal>=35) classificacao='media';
+  else                    classificacao='baixa';
+
+  return {indA, indB, indC, scoreComposto: scoreFinal, classificacao, pos, neg};
+}
+
+// ── UPDATESCORE — ATUALIZA TUDO NO PAINEL ──────────────────────────
 function updateScore(){
-  const fields=['nome','objetivo','tipo_imovel','cidade_desejada','bairro_desejado','faixa_valor','quartos','vai_financiar','urgencia','motivo'];
-  const filled=fields.filter(f=>estado[f]).length;
-  const score=Math.round((filled/fields.length)*100);
-  document.getElementById('sfill').style.width=score+'%';
-  document.getElementById('snum').textContent=score;
-  document.getElementById('sdesc').textContent=score<30?'Início da qualificação':score<60?'Em qualificação':score<85?'Quase qualificado':'✓ Lead qualificado!';
+  try {
+    const res=calcScore();
+    const {indA, indB, indC, scoreComposto, classificacao, pos, neg}=res;
+    estado._lastResult=res;
+
+    // Barras
+    const corBarra=(v)=>v>=70?'linear-gradient(90deg,#1A7A4A,#4ade80)':v>=40?'linear-gradient(90deg,#B7770D,#D4A017)':'linear-gradient(90deg,#4A1515,#f87171)';
+    const setBar=(fillId,numId,val)=>{
+      const f=document.getElementById(fillId);
+      const n=document.getElementById(numId);
+      if(f) f.style.width=val+'%';
+      if(f) f.style.background=corBarra(val);
+      if(n) n.textContent=val>0?val:(Object.keys(estado).length>3?'0':'—');
+    };
+    setBar('ia-fill','ia-num',indA);
+    setBar('ib-fill','ib-num',indB);
+    setBar('ic-fill','ic-num',indC);
+
+    // Classificação final
+    const cf=document.getElementById('class-final');
+    const configs={
+      muito_alta:{cls:'muito-alta',icon:'🔥',txt:'Muito Alta',sla:'Contatar em até 15 minutos'},
+      alta:       {cls:'alta',     icon:'🟠',txt:'Alta',      sla:'Contatar em até 1 hora'},
+      media:      {cls:'media',    icon:'🟡',txt:'Média',     sla:'Contatar hoje'},
+      baixa:      {cls:'baixa',    icon:'⚪',txt:'Baixa',     sla:'Manter em nutrição — até 48h'},
+    };
+    const cfg=configs[classificacao]||configs.baixa;
+    if(cf) cf.className='class-final '+cfg.cls;
+    const ci=document.getElementById('class-icon');
+    const ct=document.getElementById('class-txt');
+    const cs=document.getElementById('class-sla');
+    if(ci) ci.textContent=cfg.icon;
+    if(ct) ct.textContent='Probabilidade: '+cfg.txt;
+    if(cs) cs.textContent=cfg.sla;
+
+    // Ação sugerida
+    const acoes={
+      muito_alta:{cls:'urgente',icon:'🔥',txt:'Agendar visita imediatamente. Prioridade máxima.'},
+      alta:       {cls:'quente', icon:'🟠',txt:'Enviar seleção de imóveis e propor visita.'},
+      media:      {cls:'nutrir', icon:'🟡',txt:'Enviar opções de financiamento e manter contato.'},
+      baixa:      {cls:'frio',   icon:'🔴',txt:'Manter em nutrição automática.'},
+    };
+    const ac=acoes[classificacao]||acoes.baixa;
+    const ab=document.getElementById('acao-box');
+    const ai=document.getElementById('acao-icon');
+    const at=document.getElementById('acao-txt');
+    if(ab) ab.className='acao-box '+ac.cls;
+    if(ai) ai.textContent=ac.icon;
+    if(at) at.textContent='Ação sugerida: '+ac.txt;
+
+    // Badge priorização
+    const badgeWrap=document.getElementById('badge-prio-wrap');
+    const badgeEl=document.getElementById('badge-prio');
+    if(badgeWrap && badgeEl && Object.keys(estado).length>5){
+      const bConfigs={
+        muito_alta:{cls:'ligar',   txt:'🔴 Ligar agora'},
+        alta:       {cls:'visita', txt:'🟡 Agendar visita'},
+        media:      {cls:'nutrir', txt:'🟢 Nutrir'},
+        baixa:      {cls:'arquivar',txt:'⚫ Arquivar'},
+      };
+      const bc=bConfigs[classificacao]||bConfigs.baixa;
+      badgeWrap.style.display='block';
+      badgeEl.className='badge-prio '+bc.cls;
+      badgeEl.textContent=bc.txt;
+    }
+
+    // Motivos
+    renderMotivos(pos, neg);
+  } catch(err) {
+    console.error('Erro em updateScore:', err);
+  }
 }
 
+function renderMotivos(pos, neg){
+  const posSec=document.getElementById('motivos-pos');
+  const negSec=document.getElementById('motivos-neg');
+  const emptyEl=document.getElementById('motivos-empty');
+  const posList=document.getElementById('motivos-pos-list');
+  const negList=document.getElementById('motivos-neg-list');
+
+  const temDados=pos.length>0||neg.length>0;
+  emptyEl.style.display=temDados?'none':'flex';
+
+  if(pos.length>0){
+    posSec.style.display='flex';
+    posList.innerHTML=pos.map(p=>`<div class="motivo-item"><span>✅</span><span>${p}</span></div>`).join('');
+  } else {
+    posSec.style.display='none';
+  }
+
+  if(neg.length>0){
+    negSec.style.display='flex';
+    negList.innerHTML=neg.map(n=>`<div class="motivo-item"><span>⚠️</span><span>${n}</span></div>`).join('');
+  } else {
+    negSec.style.display='none';
+  }
+}
+
+function toggleMotivos(){
+  motivosPanelOpen=!motivosPanelOpen;
+  const panel=document.getElementById('motivos-panel');
+  const seta=document.getElementById('motivos-seta');
+  panel.className='motivos-panel'+(motivosPanelOpen?' open':'');
+  seta.textContent=motivosPanelOpen?'▲':'▼';
+}
+
+// ── HISTÓRICO ─────────────────────────────────────────────────────
+function addHistorico(txt){
+  const d=getDateStr();
+  historico.push({d,txt});
+  document.getElementById('historico').innerHTML=historico.map(h=>
+    `<div class="hitem"><div class="hdot2 done"></div><div class="hdate">${h.d}</div><div class="htxt">${h.txt}</div></div>`
+  ).join('');
+}
+
+// ── UI HELPERS ────────────────────────────────────────────────────
 function updateEtapas(etapa){
   for(let i=1;i<=4;i++){
     const c=document.getElementById('e'+i);
@@ -356,13 +1176,11 @@ function updateEtapas(etapa){
   }
 }
 
-function addMsg(role, text){
+function addMsg(role,text){
   const c=document.getElementById('msgs');
   const d=document.createElement('div');
   d.className='msg '+role;
-  // Converte \n em <br>
-  const formatted = text.replace(/\n/g,'<br>');
-  d.innerHTML=`<div class="bubble">${formatted}</div><div class="mtime">${role==='user'?'✓✓ ':''}${getTime()}</div>`;
+  d.innerHTML=`<div class="bubble">${text.replace(/\n/g,'<br>')}</div><div class="mtime">${role==='user'?'✓✓ ':''}${getTime()}</div>`;
   c.appendChild(d);
   c.scrollTop=c.scrollHeight;
 }
@@ -390,50 +1208,64 @@ function showOpts(opts){
   });
 }
 
+// ── PROCESS INPUT ─────────────────────────────────────────────────
 function processInput(inp){
   if(loading) return;
   document.getElementById('opts').style.display='none';
   const passo=fluxoMap[passoAtual];
   if(!passo) return;
 
-  addMsg('user', inp);
+  addMsg('user',inp);
   loading=true;
   document.getElementById('sbtn').disabled=true;
 
-  // Captura dado
+  // Captura via captura/capturaValor (apenas para passos que ainda usam esse mecanismo)
   if(passo.captura){
-    const val = passo.capturaValor || inp.replace(/^[^\w\s]/,'').trim();
-    setFicha(passo.captura, val);
+    const val=passo.capturaValor||inp.trim();
+    setFicha(passo.captura,val);
+  }
+
+  let proximoId;
+  try {
+    proximoId = passo.proximo(inp, estado);
+  } catch(err) {
+    console.error('Erro em proximo() do passo', passoAtual, ':', err);
+    loading=false;
+    document.getElementById('sbtn').disabled=false;
+    return;
   }
 
   showTyping();
-  const delay = 800 + Math.random()*600;
-
   setTimeout(()=>{
     removeTyping();
-    const proximo = passo.proximo(inp, estado);
+    if(inp.includes('Nova consulta')||inp.includes('Reiniciar')){reset();return;}
 
-    // Caso especial: nova consulta
-    if(inp.includes('Nova consulta')||inp.includes('Reiniciar')){
-      reset(); return;
-    }
-
-    passoAtual = proximo;
-    const novoPasso = fluxoMap[passoAtual];
-    if(!novoPasso){ loading=false; return; }
+    passoAtual=proximoId;
+    const novoPasso=fluxoMap[passoAtual];
+    if(!novoPasso){loading=false;return;}
 
     updateEtapas(novoPasso.etapa);
 
-    const msg = typeof novoPasso.rex === 'function' ? novoPasso.rex(estado) : novoPasso.rex;
+    let msg;
+    try {
+      msg=typeof novoPasso.rex==='function'?novoPasso.rex(estado):novoPasso.rex;
+    } catch(err) {
+      console.error('Erro em rex() do passo', passoAtual, ':', err);
+      msg='Desculpe, ocorreu um erro. Clique em Reiniciar.';
+    }
     addMsg('rex', msg);
 
-    const opts = typeof novoPasso.opts === 'function' ? novoPasso.opts(estado) : novoPasso.opts;
+    let opts;
+    try {
+      opts=typeof novoPasso.opts==='function'?novoPasso.opts(estado):novoPasso.opts;
+    } catch(err) {
+      opts=[];
+    }
     showOpts(opts);
-
     loading=false;
     document.getElementById('sbtn').disabled=false;
     document.getElementById('inp').focus();
-  }, delay);
+  }, 800+Math.random()*600);
 }
 
 function send(){
@@ -444,39 +1276,547 @@ function send(){
   processInput(txt);
 }
 
+// ══════════════════════════════════════════════════════════════════
+// POTENCIAL DE CAPTAÇÃO v1.0 — FLUXO VENDEDOR
+// ══════════════════════════════════════════════════════════════════
+
+function mostrarPainelVendedor(){
+  document.getElementById('painel-comprador').style.display='none';
+  document.getElementById('painel-vendedor').classList.add('ativo');
+}
+function mostrarPainelComprador(){
+  document.getElementById('painel-vendedor').classList.remove('ativo');
+  document.getElementById('painel-comprador').style.display='block';
+}
+
+let capMotivosPanelOpen=false;
+function toggleMotivosCap(){
+  capMotivosPanelOpen=!capMotivosPanelOpen;
+  document.getElementById('cap-motivos-panel').className='motivos-panel'+(capMotivosPanelOpen?' open':'');
+  document.getElementById('cap-motivos-seta').textContent=capMotivosPanelOpen?'▲':'▼';
+}
+
+function calcCaptacao(){
+  const e=estado;
+  const pos=[], neg=[];
+  const portfolio=['porto alegre','balneário camboriú','florianópolis','gramado','novo hamburgo'];
+  const cidade=(e.cidade_desejada||'').toLowerCase();
+  const cidadeOk=portfolio.some(c=>cidade.includes(c));
+
+  // ── INDICADOR A — ATRATIVIDADE COMERCIAL (peso 40%) ───────────
+  let ptsA=0;
+
+  // Localização
+  if(cidadeOk){
+    const bairrosAlta=['menino deus','moinhos','petrópolis','petropolis','independência','independencia','centro','beira mar','agronômica'];
+    const bairro=(e.bairro_desejado||cidade).toLowerCase();
+    const bairroAlta=bairrosAlta.some(b=>bairro.includes(b));
+    if(bairroAlta){ ptsA+=40; pos.push('Localização em área de alta demanda do portfólio'); }
+    else{ ptsA+=30; pos.push('Cidade do portfólio ativo'); }
+  } else if(e.cidade_desejada){
+    ptsA+=12; neg.push('Cidade fora do raio principal — avaliar viabilidade de atuação');
+  } else {
+    neg.push('Localização não informada');
+  }
+
+  // Tipo e demanda
+  const tipo=(e.tipo_imovel||'').toLowerCase();
+  if(tipo.includes('apartamento')){ ptsA+=25; pos.push('Apartamento — produto de alta demanda no mercado'); }
+  else if(tipo.includes('casa'))  { ptsA+=22; pos.push('Casa — boa demanda para famílias'); }
+  else if(tipo.includes('sala'))  { ptsA+=15; pos.push('Sala comercial — demanda específica'); }
+  else if(tipo.includes('terreno')){ ptsA+=13; pos.push('Terreno — procura por construtores e investidores'); }
+
+  // Preço de mercado
+  const preco=(e.preco_mercado||'').toLowerCase();
+  if(preco==='compativel'){    ptsA+=20; pos.push('Preço dentro do mercado — vende sem objeções'); }
+  else if(preco==='levemente_acima'){ ptsA+=12; neg.push('Preço levemente acima do mercado — pode precisar de ajuste'); }
+  else if(preco==='aberto_avaliacao'){ ptsA+=16; pos.push('Proprietário aberto a avaliação profissional'); }
+  else if(preco==='muito_acima'){ ptsA+=2;  neg.push('Preço fixo acima do mercado — alto risco de não vender'); }
+
+  const indA=Math.min(100, ptsA);
+
+  // ── INDICADOR B — FACILIDADE DE VENDA (peso 35%) ──────────────
+  let ptsB=0;
+
+  // Urgência
+  const urg=(e.urgencia||'').toLowerCase();
+  if(urg==='urgente'){    ptsB+=35; pos.push('Urgência alta — proprietário motivado a negociar'); }
+  else if(urg==='3_meses'){ ptsB+=28; pos.push('Prazo de 3 meses — janela clara para trabalhar'); }
+  else if(urg==='6_meses'){ ptsB+=18; pos.push('Prazo de 6 meses — motivado, mas pode perder urgência'); }
+  else if(urg==='sem_pressa'){ ptsB+=5; neg.push('Sem urgência declarada — risco de abandono da negociação'); }
+  else if(urg==='testando'){ ptsB+=0; neg.push('Apenas testando o mercado — sem comprometimento real'); }
+
+  // Financiamento aceito
+  const fin=(e.vai_financiar||'').toLowerCase();
+  if(fin==='qualquer'){      ptsB+=22; pos.push('Aceita qualquer forma — amplia o universo de compradores'); }
+  else if(fin==='com_condicoes'){ ptsB+=15; pos.push('Aceita financiamento com condições'); }
+  else if(fin==='somente_vista'){ ptsB+=4;  neg.push('Somente à vista — restringe muito o público comprador'); }
+
+  // Motivação
+  const mot=(e.motivo||'').toLowerCase();
+  if(mot==='divida'){       ptsB+=18; pos.push('Necessidade financeira — alta probabilidade de negociar'); }
+  else if(mot==='mudanca'){ ptsB+=16; pos.push('Mudança de cidade — prazo externo definido'); }
+  else if(mot==='separacao'||mot==='comprou_outro'){ ptsB+=14; pos.push('Motivação concreta — precisa fechar'); }
+  else if(mot==='aposentadoria'||mot==='upgrade'){ ptsB+=10; pos.push('Motivação real, sem pressão de prazo'); }
+  else if(mot==='investidor'){ ptsB+=6; pos.push('Realizando investimento — fecha se o número fechar'); }
+  else if(mot==='testando'){ ptsB+=0; neg.push('Apenas testando o mercado — sem intenção real de vender'); }
+
+  const indB=Math.min(100, ptsB);
+
+  // ── INDICADOR C — QUALIDADE DA CAPTAÇÃO (peso 25%) ────────────
+  let ptsC=0, penC=0;
+
+  // Exclusividade
+  const excl=(e.exclusividade||'').toLowerCase();
+  if(excl==='total'){       ptsC+=30; pos.push('Exclusividade total — investimento com segurança de retorno'); }
+  else if(excl==='preferencia'){ ptsC+=20; pos.push('Preferência dada à imobiliária'); }
+  else if(excl==='sem'){    ptsC+=8;  neg.push('Sem exclusividade — concorrência com outras imobiliárias'); }
+  else if(excl==='vende_direto'){ ptsC+=3; neg.push('Vende por conta própria também — risco de perder a comissão'); }
+
+  // Conservação
+  const cons=(e.conservacao||'').toLowerCase();
+  if(cons==='excelente'){ ptsC+=22; pos.push('Excelente conservação — fotos boas, visita converte mais'); }
+  else if(cons==='bom')   { ptsC+=16; pos.push('Boa conservação — aceitável para anunciar'); }
+  else if(cons==='regular'){ ptsC+=8; neg.push('Estado regular — pode impactar preço e prazo de venda'); }
+  else if(cons==='ruim')  { ptsC+=2;  neg.push('Precisa de reforma — muito difícil de vender no estado atual'); }
+
+  // Documentação
+  const doc=(e.documentacao||'').toLowerCase();
+  if(doc==='completa'){          ptsC+=22; pos.push('Documentação completa — sem obstáculos jurídicos'); }
+  else if(doc==='pendencias_menores'){ ptsC+=14; neg.push('Pendências menores na documentação — regularizar antes de anunciar'); }
+  else if(doc==='incompleta'){   ptsC+=5;  neg.push('Documentação incompleta — atrasa o fechamento'); penC+=8; }
+  else if(doc==='problemas_serios'){ ptsC+=0; neg.push('⚠️ Problemas jurídicos — risco para a imobiliária'); penC+=15; }
+
+  const indC=Math.min(100, Math.max(0, ptsC - penC));
+
+  // ── SCORE COMPOSTO ────────────────────────────────────────────
+  let score=Math.round((indA*0.40)+(indB*0.35)+(indC*0.25));
+
+  // ── OVERRIDES ────────────────────────────────────────────────
+  // Documentação com problemas sérios → teto rígido
+  if(doc==='problemas_serios' && score>30){ score=30; neg.push('Teto aplicado: problemas jurídicos impedem captação segura'); }
+  // Testando mercado → sempre baixa prioridade
+  if(urg==='testando'||mot==='testando'){ score=Math.min(score,25); }
+  // Exclusividade + urgência alta → mínimo Estratégica
+  if(excl==='total' && (urg==='urgente'||urg==='3_meses') && score<60){ score=60; pos.push('Override: exclusividade + urgência — mínimo Captação Estratégica'); }
+  // Preço muito acima sem abertura → teto Baixa Prioridade
+  if(preco==='muito_acima' && score>30){ score=Math.min(score,34); neg.push('Teto: preço fixo acima do mercado sem abertura para negociar'); }
+
+  let classificacao;
+  if(score>=80)      classificacao='premium';
+  else if(score>=60) classificacao='estrategica';
+  else if(score>=35) classificacao='regular';
+  else               classificacao='baixa';
+
+  return {indA, indB, indC, score, classificacao, pos, neg};
+}
+
+function updateCaptacao(){
+  try {
+    const res=calcCaptacao();
+    const {indA,indB,indC,score,classificacao,pos,neg}=res;
+    const cor=(v)=>v>=70?'linear-gradient(90deg,#1A7A4A,#4ade80)':v>=40?'linear-gradient(90deg,#B7770D,#D4A017)':'linear-gradient(90deg,#4A1515,#f87171)';
+
+    const sb=(f,n,v)=>{
+      const fe=document.getElementById(f), ne=document.getElementById(n);
+      if(fe){fe.style.width=v+'%';fe.style.background=cor(v);}
+      if(ne) ne.textContent=v>0?v:'—';
+    };
+    sb('ca-fill','ca-num',indA);
+    sb('cb-fill','cb-num',indB);
+    sb('cc-fill','cc-num',indC);
+
+    const configs={
+      premium:    {cls:'premium',    icon:'🏆', txt:'Captação Premium',          sla:'Assinar contrato hoje — anunciar imediatamente'},
+      estrategica:{cls:'estrategica',icon:'🟢', txt:'Captação Estratégica',      sla:'Captar com negociação de exclusividade'},
+      regular:    {cls:'regular',    icon:'🟡', txt:'Captação Regular',           sla:'Avaliar custo-benefício antes de captar'},
+      baixa:      {cls:'baixa',      icon:'🔴', txt:'Baixa Prioridade',           sla:'Não captar agora — revisitar em 60 dias'},
+    };
+    const cfg=configs[classificacao]||configs.baixa;
+    const cc=document.getElementById('cap-class');
+    if(cc) cc.className='cap-class '+cfg.cls;
+    const ci=document.getElementById('cap-icon'), ct=document.getElementById('cap-txt'), cs=document.getElementById('cap-sla');
+    if(ci) ci.textContent=cfg.icon;
+    if(ct) ct.textContent=cfg.txt;
+    if(cs) cs.textContent=cfg.sla;
+
+    const acoes={
+      premium:    {cls:'premium',    icon:'🏆', txt:'Assinar contrato de exclusividade hoje. Agendar fotos em 48h.'},
+      estrategica:{cls:'estrategica',icon:'🟢', txt:'Captar e negociar exclusividade. Fazer avaliação de mercado.'},
+      regular:    {cls:'regular',    icon:'🟡', txt:'Condicionar captação: preço ajustado ou documentação regularizada.'},
+      baixa:      {cls:'baixa',      icon:'🔴', txt:'Não captar agora. Ser transparente com o proprietário.'},
+    };
+    const ac=acoes[classificacao]||acoes.baixa;
+    const ab=document.getElementById('cap-acao');
+    if(ab) ab.className='cap-acao '+ac.cls;
+    const ai=document.getElementById('cap-acao-icon'), at=document.getElementById('cap-acao-txt');
+    if(ai) ai.textContent=ac.icon;
+    if(at) at.textContent=ac.txt;
+
+    // Motivos
+    const pe=document.getElementById('cap-motivos-pos'), ne2=document.getElementById('cap-motivos-neg');
+    const pl=document.getElementById('cap-motivos-pos-list'), nl=document.getElementById('cap-motivos-neg-list');
+    const emp=document.getElementById('cap-motivos-empty');
+    const tem=pos.length>0||neg.length>0;
+    if(emp) emp.style.display=tem?'none':'flex';
+    if(pos.length>0){
+      if(pe) pe.style.display='flex';
+      if(pl) pl.innerHTML=pos.map(p=>`<div class="motivo-item"><span>✅</span><span>${p}</span></div>`).join('');
+    } else { if(pe) pe.style.display='none'; }
+    if(neg.length>0){
+      if(ne2) ne2.style.display='flex';
+      if(nl) nl.innerHTML=neg.map(n=>`<div class="motivo-item"><span>⚠️</span><span>${n}</span></div>`).join('');
+    } else { if(ne2) ne2.style.display='none'; }
+    // Módulos extras — só mostrar quando qualificação completa (tem motivo)
+    if(estado.motivo){
+      mostrarModulosVendedor(res);
+    }
+  } catch(err){ console.error('Erro em updateCaptacao:', err); }
+}
+
+async function calcILC(res){
+  const e=estado;
+  const prompt=`Você é o motor de inteligência comercial do Rex AI.
+Dados do imóvel captado:
+- Tipo: ${e.tipo_imovel||'—'}
+- Cidade/Bairro: ${e.cidade_desejada||'—'}
+- Faixa de valor: ${e.faixa_valor||'—'}
+- Conservação: ${e.conservacao||'—'}
+- Documentação: ${e.documentacao||'—'}
+- Urgência do proprietário: ${e.urgencia||'—'}
+- Exclusividade: ${e.exclusividade||'—'}
+- Condições de pagamento aceitas: ${e.vai_financiar||'—'}
+- Motivação da venda: ${e.motivo||'—'}
+- Score de atratividade comercial: ${res.indA}/100
+- Score de facilidade de venda: ${res.indB}/100
+- Score de qualidade da captação: ${res.indC}/100
+- Classificação final: ${res.classificacao}
+
+Regras obrigatórias:
+1. Nunca informe probabilidades acima de 92% ou abaixo de 8%.
+2. Gere um Índice de Liquidez Comercial (ILC) de 0 a 100.
+3. Classifique: 0-39=Baixa, 40-69=Média, 70-84=Alta, 85-100=Muito Alta.
+4. Calcule probabilidade de venda em 90 e 180 dias.
+5. Estime tempo médio de venda em dias.
+6. A analise_comercial deve ter no máximo 2 frases em linguagem comercial para o corretor.
+7. Retorne SOMENTE JSON válido, sem markdown, sem explicações.
+
+Formato obrigatório:
+{"indice_liquidez":87,"classificacao":"Muito Alta","probabilidade_90_dias":76,"probabilidade_180_dias":91,"tempo_medio_estimado_dias":72,"pontos_favoraveis":["Proprietário motivado","Preço compatível"],"fatores_de_risco":["Sem exclusividade"],"analise_comercial":"Texto aqui."}`;
+
+  try {
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await resp.json();
+    const txt=(data.content||[]).map(b=>b.text||'').join('');
+    const clean=txt.replace(/```json|```/g,'').trim();
+    return JSON.parse(clean);
+  } catch(e){
+    console.error('ILC API error:',e);
+    return null;
+  }
+}
+
+function calcComissao(){
+  const val=(estado.faixa_valor||'').toLowerCase();
+  let base=0;
+  if(val.includes('700')||val.includes('acima')) base=700000;
+  else if(val.includes('400')) base=550000;
+  else if(val.includes('200')) base=300000;
+  else base=400000;
+  const comissao=Math.round(base*0.06);
+  const receita90=comissao; // 100% se vender em 90d
+  return {base, comissao, receita90};
+}
+
+function fitCarteira(){
+  // Simulação baseada em tipo + cidade
+  const tipo=(estado.tipo_imovel||'').toLowerCase();
+  const cidade=(estado.cidade_desejada||'').toLowerCase();
+  let n=0;
+  if(cidade.includes('porto alegre')) n+=8;
+  if(cidade.includes('balneário')||cidade.includes('florianópolis')) n+=6;
+  if(cidade.includes('gramado')) n+=4;
+  if(tipo.includes('apartamento')) n+=6;
+  if(tipo.includes('casa')) n+=4;
+  if(tipo.includes('terreno')) n+=3;
+  n=Math.max(3,Math.min(n+Math.floor(Math.random()*4),22));
+  return n;
+}
+
+async function mostrarModulosVendedor(res){
+  // Comissão (instantâneo)
+  const {comissao}=calcComissao();
+  const modCom=document.getElementById('mod-comissao');
+  if(modCom){
+    modCom.style.display='block';
+    const cv=document.getElementById('com-valor');
+    const c90=document.getElementById('com-90');
+    if(cv) cv.textContent='R$ '+comissao.toLocaleString('pt-BR');
+    if(c90) c90.textContent='R$ '+comissao.toLocaleString('pt-BR');
+  }
+
+  // Fit com carteira (instantâneo)
+  const fit=fitCarteira();
+  const modFit=document.getElementById('mod-fit');
+  if(modFit){
+    modFit.style.display='block';
+    const fn=document.getElementById('fit-num');
+    const ft=document.getElementById('fit-txt');
+    if(fn) fn.textContent=fit;
+    if(ft) ft.textContent=`compradores ativos no portfólio com perfil semelhante a este imóvel.`;
+  }
+
+  // ILC via API (assíncrono)
+  const modIlc=document.getElementById('mod-ilc');
+  const ilcLoad=document.getElementById('ilc-loading');
+  const ilcCont=document.getElementById('ilc-content');
+  if(modIlc){ modIlc.style.display='block'; }
+  if(ilcLoad){ ilcLoad.style.display='flex'; }
+  if(ilcCont){ ilcCont.style.display='none'; }
+
+  const ilc=await calcILC(res);
+  if(ilcLoad){ ilcLoad.style.display='none'; }
+
+  if(ilc && ilcCont){
+    ilcCont.style.display='block';
+    const cor=ilc.indice_liquidez>=70?'linear-gradient(90deg,#1A7A4A,#4ade80)':
+              ilc.indice_liquidez>=40?'linear-gradient(90deg,#B7770D,#D4A017)':
+              'linear-gradient(90deg,#4A1515,#f87171)';
+    const el=id=>document.getElementById(id);
+    if(el('ilc-num'))  el('ilc-num').textContent=ilc.indice_liquidez;
+    if(el('ilc-fill')){ el('ilc-fill').style.width=ilc.indice_liquidez+'%'; el('ilc-fill').style.background=cor; }
+    if(el('ilc-class')) el('ilc-class').textContent=ilc.classificacao;
+    if(el('ilc-tempo')) el('ilc-tempo').textContent='~'+ilc.tempo_medio_estimado_dias+' dias';
+    if(el('prob-90'))  el('prob-90').textContent=ilc.probabilidade_90_dias+'%';
+    if(el('prob-180')) el('prob-180').textContent=ilc.probabilidade_180_dias+'%';
+    if(el('ilc-analise')) el('ilc-analise').textContent=ilc.analise_comercial||'';
+  } else if(modIlc){
+    // Fallback se API falhar — calcular localmente
+    const s=res.score;
+    const p90=Math.round(Math.max(8,Math.min(92,s*0.38)));
+    const p180=Math.round(Math.max(8,Math.min(92,s*0.62)));
+    if(ilcCont) ilcCont.style.display='block';
+    const el=id=>document.getElementById(id);
+    if(el('ilc-num'))  el('ilc-num').textContent=s;
+    if(el('ilc-fill')){ el('ilc-fill').style.width=s+'%'; }
+    if(el('ilc-class')) el('ilc-class').textContent=res.classificacao;
+    if(el('ilc-tempo')) el('ilc-tempo').textContent='estimativa local';
+    if(el('prob-90'))  el('prob-90').textContent=p90+'%';
+    if(el('prob-180')) el('prob-180').textContent=p180+'%';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MATCH ENGINE — imóveis simulados do portfólio
+// ══════════════════════════════════════════════════════════════════
+
+const PORTFOLIO_IMOVEIS = [
+  {id:1, nome:'Apto 3q · Menino Deus', cidade:'Porto Alegre', bairro:'Menino Deus', tipo:'Apartamento', quartos:3, valor:620000, aceita_financ:true, aceita_fgts:true, exclusividade:'total', conservacao:'excelente'},
+  {id:2, nome:'Apto 2q · Moinhos de Vento', cidade:'Porto Alegre', bairro:'Moinhos de Vento', tipo:'Apartamento', quartos:2, valor:680000, aceita_financ:true, aceita_fgts:false, exclusividade:'preferencia', conservacao:'bom'},
+  {id:3, nome:'Casa 3q · Petrópolis', cidade:'Porto Alegre', bairro:'Petrópolis', tipo:'Casa', quartos:3, valor:575000, aceita_financ:true, aceita_fgts:true, exclusividade:'sem', conservacao:'bom'},
+  {id:4, nome:'Apto 1q · Centro', cidade:'Porto Alegre', bairro:'Centro', tipo:'Apartamento', quartos:1, valor:290000, aceita_financ:true, aceita_fgts:true, exclusividade:'total', conservacao:'regular'},
+  {id:5, nome:'Apto 3q · Petrópolis', cidade:'Florianópolis', bairro:'Petrópolis', tipo:'Apartamento', quartos:3, valor:750000, aceita_financ:true, aceita_fgts:false, exclusividade:'total', conservacao:'excelente'},
+  {id:6, nome:'Casa 4q · Beira Mar', cidade:'Balneário Camboriú', bairro:'Beira Mar', tipo:'Casa', quartos:4, valor:1200000, aceita_financ:false, aceita_fgts:false, exclusividade:'total', conservacao:'excelente'},
+  {id:7, nome:'Terreno · Gramado', cidade:'Gramado', bairro:'Centro', tipo:'Terreno', quartos:0, valor:320000, aceita_financ:true, aceita_fgts:true, exclusividade:'preferencia', conservacao:'bom'},
+  {id:8, nome:'Apto 2q · Independência', cidade:'Porto Alegre', bairro:'Independência', tipo:'Apartamento', quartos:2, valor:420000, aceita_financ:true, aceita_fgts:true, exclusividade:'sem', conservacao:'bom'},
+];
+
+function calcMatchScore(comprador, imovel){
+  let score = 0;
+  const fits = [], parciais = [];
+
+  // Localização (0–30)
+  const cidComp = (comprador.cidade_desejada||'').toLowerCase();
+  const cidImo  = imovel.cidade.toLowerCase();
+  const bairComp = (comprador.bairro_desejado||'').toLowerCase();
+  const bairImo  = imovel.bairro.toLowerCase();
+  if(cidComp && cidImo.includes(cidComp.split(' ')[0])){
+    if(bairComp && !bairComp.includes('sem') && bairImo.includes(bairComp.split(' ')[0])){
+      score+=30; fits.push('Bairro exato');
+    } else { score+=20; fits.push('Cidade'); }
+  } else if(!cidComp){ score+=15; }
+
+  // Tipo (0–20)
+  const tipoComp = (comprador.tipo_imovel||'').toLowerCase();
+  const tipoImo  = imovel.tipo.toLowerCase();
+  if(tipoComp && tipoImo.includes(tipoComp.split(' ')[0])){
+    score+=20; fits.push('Tipo');
+  }
+
+  // Quartos (0–15)
+  if(comprador.quartos && imovel.quartos > 0){
+    const qtComp = parseInt(comprador.quartos)||0;
+    if(qtComp === imovel.quartos){ score+=15; fits.push('Quartos'); }
+    else if(imovel.quartos > qtComp){ score+=8; parciais.push('Quartos+'); }
+    else { score+=3; }
+  } else { score+=8; }
+
+  // Financeiro (0–20)
+  const fin = (comprador.vai_financiar||'').toLowerCase();
+  const temAprov = comprador.tem_fgts==='sim'||fin==='aprovado';
+  if(fin==='vista'){ score+=20; fits.push('À vista'); }
+  else if(fin==='aprovado'){ score+=20; fits.push('Financ. aprovado'); }
+  else if(imovel.aceita_financ && fin==='financiar'){
+    if(imovel.aceita_fgts && comprador.tem_fgts==='sim'){ score+=18; fits.push('FGTS aceito'); }
+    else { score+=15; fits.push('Financiamento'); }
+  } else { score+=5; }
+
+  // Valor (0–15)
+  const faixa = (comprador.faixa_valor||'').toLowerCase();
+  if(faixa && imovel.valor){
+    if(faixa.includes('acima')||faixa.includes('700')){ if(imovel.valor>=400000){score+=15;fits.push('Valor');} else{score+=5;parciais.push('Valor~');} }
+    else if(faixa.includes('400')){ if(imovel.valor>=300000&&imovel.valor<=750000){score+=15;fits.push('Valor');} else{score+=6;parciais.push('Valor~');} }
+    else if(faixa.includes('200')){ if(imovel.valor>=150000&&imovel.valor<=450000){score+=15;fits.push('Valor');} else{score+=5;parciais.push('Valor~');} }
+    else { score+=8; }
+  } else { score+=8; }
+
+  return { score: Math.min(100, score), fits, parciais };
+}
+
+async function mostrarMatch(){
+  const e = estado;
+  if(e.objetivo==='Vender') return; // match só para compradores
+
+  const wrap = document.getElementById('mod-match');
+  const loading = document.getElementById('match-loading');
+  const empty = document.getElementById('match-empty');
+  const list = document.getElementById('match-list');
+  const sub = document.getElementById('match-head-sub');
+
+  if(!wrap) return;
+  wrap.classList.add('ativo');
+  if(empty) empty.style.display='none';
+  if(loading) loading.style.display='flex';
+  if(list) list.innerHTML='';
+
+  // Pequeno delay para dar sensação de processamento
+  await new Promise(r=>setTimeout(r, 1200));
+
+  if(loading) loading.style.display='none';
+
+  // Calcular scores e ordenar
+  const resultados = PORTFOLIO_IMOVEIS
+    .map(im=>({ im, ...calcMatchScore(e, im) }))
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,3); // top 3
+
+  if(sub) sub.textContent = `${resultados.filter(r=>r.score>=60).length} compatíveis encontrados`;
+
+  list.innerHTML = resultados.map(r=>{
+    const circleCls = r.score>=70?'msc-high':r.score>=45?'msc-mid':'msc-low';
+    const fitsHtml = r.fits.map(f=>`<span class="fit-ok">✓ ${f}</span>`).join('');
+    const parHtml  = r.parciais.map(f=>`<span class="fit-par">~ ${f}</span>`).join('');
+    const valorFmt = 'R$ '+r.im.valor.toLocaleString('pt-BR');
+    const excl = r.im.exclusividade==='total'?'🔒 Exclusivo':'';
+    return `
+    <div class="match-item">
+      <div class="match-score-circle ${circleCls}">${r.score}</div>
+      <div class="match-info">
+        <div class="match-imovel">${r.im.nome}</div>
+        <div class="match-detalhe">${r.im.cidade} · ${valorFmt}${excl?' · '+excl:''}</div>
+        <div class="match-fits">${fitsHtml}${parHtml}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  addHistorico('Match Engine: '+resultados.filter(r=>r.score>=60).length+' imóveis compatíveis');
+}
+
+// ── RESET ─────────────────────────────────────────────────────────
 function reset(){
-  estado={};
+  Object.keys(estado).forEach(k=>delete estado[k]);
   loading=false;
   passoAtual='inicio';
+  historico.length=0;
+  motivosPanelOpen=false;
+  capMotivosPanelOpen=false;
+
   document.getElementById('msgs').innerHTML='';
   document.getElementById('opts').style.display='none';
   document.getElementById('fname').textContent='Aguardando...';
-  ['fo','ft','fc','fb','fv','fq','ff','fu','fm'].forEach(id=>{
-    const el=document.getElementById(id);el.textContent='—';el.className='fval';
+  ['fo','ft','fc','fb','fv','fq','ff','fg','fu','fm'].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.textContent='—';el.className='fval';}
   });
-  document.getElementById('sfill').style.width='0%';
-  document.getElementById('snum').textContent='0';
-  document.getElementById('sdesc').textContent='Aguardando dados';
+
+  mostrarPainelComprador();
+
+  ['ia-fill','ib-fill','ic-fill'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.style.width='0%';el.style.background='rgba(255,255,255,0.08)';}
+  });
+  ['ia-num','ib-num','ic-num'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
+
+  const cf=document.getElementById('class-final'); if(cf) cf.className='class-final baixa';
+  const ci=document.getElementById('class-icon'); if(ci) ci.textContent='⚪';
+  const ct=document.getElementById('class-txt'); if(ct) ct.textContent='Aguardando dados';
+  const cs=document.getElementById('class-sla'); if(cs) cs.textContent='Preencha a conversa para classificar';
+  const ab=document.getElementById('acao-box'); if(ab) ab.className='acao-box frio';
+  const ai=document.getElementById('acao-icon'); if(ai) ai.textContent='🕐';
+  const at=document.getElementById('acao-txt'); if(at) at.textContent='Ação sugerida disponível após qualificação';
+  const mp=document.getElementById('motivos-panel'); if(mp) mp.className='motivos-panel';
+  const mse=document.getElementById('motivos-seta'); if(mse) mse.textContent='▼';
+  ['motivos-pos','motivos-neg'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  const me=document.getElementById('motivos-empty'); if(me) me.style.display='flex';
+
+  ['ca-fill','cb-fill','cc-fill'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.style.width='0%';el.style.background='rgba(255,255,255,0.08)';}
+  });
+  ['ca-num','cb-num','cc-num'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
+  const cc=document.getElementById('cap-class'); if(cc) cc.className='cap-class baixa';
+  const cki=document.getElementById('cap-icon'); if(cki) cki.textContent='⏳';
+  const ckt=document.getElementById('cap-txt'); if(ckt) ckt.textContent='Aguardando dados';
+  const cks=document.getElementById('cap-sla'); if(cks) cks.textContent='Preencha a conversa para avaliar';
+  const cka=document.getElementById('cap-acao'); if(cka) cka.className='cap-acao baixa';
+  const ckai=document.getElementById('cap-acao-icon'); if(ckai) ckai.textContent='🕐';
+  const ckat=document.getElementById('cap-acao-txt'); if(ckat) ckat.textContent='Análise disponível após qualificação';
+  const cmp=document.getElementById('cap-motivos-panel'); if(cmp) cmp.className='motivos-panel';
+  const cms=document.getElementById('cap-motivos-seta'); if(cms) cms.textContent='▼';
+  ['cap-motivos-pos','cap-motivos-neg'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  const cme=document.getElementById('cap-motivos-empty'); if(cme) cme.style.display='flex';
+
+  // Reset módulos extras vendedor
+  ['mod-ilc','mod-comissao','mod-fit'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  const ilcL=document.getElementById('ilc-loading'); if(ilcL) ilcL.style.display='flex';
+  const ilcC=document.getElementById('ilc-content'); if(ilcC) ilcC.style.display='none';
+
+  // Reset match engine
+  const mw=document.getElementById('mod-match'); if(mw) mw.classList.remove('ativo');
+  const ml=document.getElementById('match-list'); if(ml) ml.innerHTML='';
+  const meMatch=document.getElementById('match-empty'); if(meMatch) meMatch.style.display='block';
+  const mload=document.getElementById('match-loading'); if(mload) mload.style.display='none';
+  const msub=document.getElementById('match-head-sub'); if(msub) msub.textContent='imóveis compatíveis';
+
+  // Reset badge priorização
+  const bw=document.getElementById('badge-prio-wrap'); if(bw) bw.style.display='none';
+
+  document.getElementById('historico').innerHTML=
+    '<div class="hitem"><div class="hdot2"></div><div class="hdate"></div><div class="htxt" style="color:rgba(255,255,255,0.2)">Aguardando conversa</div></div>';
+
   for(let i=1;i<=4;i++){
-    document.getElementById('e'+i).className=i===1?'ecircle active':'ecircle';
-    document.getElementById('e'+i).textContent=i;
-    document.getElementById('et'+i).className=i===1?'etext active':'etext';
+    const ec=document.getElementById('e'+i); if(ec){ec.className=i===1?'ecircle active':'ecircle';ec.textContent=i;}
+    const et=document.getElementById('et'+i); if(et) et.className=i===1?'etext active':'etext';
   }
   document.getElementById('sbtn').disabled=false;
 
-  // Mensagem inicial
   loading=true;
   showTyping();
   setTimeout(()=>{
     removeTyping();
     const passo=fluxoMap['inicio'];
-    addMsg('rex', passo.rex);
+    addMsg('rex',passo.rex);
     showOpts(passo.opts);
     loading=false;
-  }, 900);
+  },900);
 }
-
-// Iniciar
 window.addEventListener('load',()=>setTimeout(reset,400));
 </script>
 </body>
